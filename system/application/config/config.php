@@ -14,8 +14,7 @@
 | path to your installation.
 |
 */
-$config['base_url']	= 'http://intranet.arrowsmith.wigan.sch.uk/baseline/';
-//$config['base_url']	= 'http://localhost/~jonathan/baseline/';
+$config['base_url']	= 'http://localhost/~administrator/goQuizBase/';
 
 /*
 |--------------------------------------------------------------------------

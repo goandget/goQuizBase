@@ -49,8 +49,8 @@ $active_record = TRUE;
 
 $db['default']['hostname'] = 'localhost';
 $db['default']['username'] = 'root';
-$db['default']['password'] = 'Prem1ersh1p';
-$db['default']['database'] = 'baseline';
+$db['default']['password'] = '';
+$db['default']['database'] = 'goQuizBase';
 $db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = '';
 $db['default']['pconnect'] = TRUE;
