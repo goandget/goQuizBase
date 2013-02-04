@@ -13,6 +13,14 @@
 					<td><?=form_input('school', set_value('school'))?></td>
 				</tr>
 				<tr>
+					<td>Forename: </td>
+					<td><?php echo form_input('forename', set_value('forename'));?></td>
+				</tr>
+				<tr>
+					<td>Surname: </td>
+					<td><?php echo form_input('surname', set_value('surname'));?></td>
+				</tr>
+				<tr>
 					<td>Email: </td>
 					<td><?=form_input('email', set_value('email'))?></td>
 				</tr>

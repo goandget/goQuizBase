@@ -45,8 +45,7 @@ class Account_model extends CI_Model {
 	 * Creates an account
 	 *
 	 * @access	public
-	 * @access	string
-	 * @access	string
+	 * @access	array
 	 * @return	void
 	 */
 	public function create($data)
@@ -54,6 +53,8 @@ class Account_model extends CI_Model {
 		$account = array(
 			'email'      => $data['email'],
 			'school'     => $data['school'],
+			'forename'   => $data['forename'],
+			'surname'   => $data['surname'],
 			'username'   => $data['username'],
 			'password'   => $this->encrypt_password($data['username'], $data['password']),
 			'ip_address' => $this->input->ip_address(),

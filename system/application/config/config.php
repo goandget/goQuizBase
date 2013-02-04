@@ -14,8 +14,8 @@
 | path to your installation.
 |
 */
-$config['base_url']	= 'http://localhost/~administrator/goQuizBase/';
-
+//$config['base_url']	= 'http://localhost/~administrator/goQuizBase/';
+$config['base_url']	= '';
 /*
 |--------------------------------------------------------------------------
 | Index File

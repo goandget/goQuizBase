@@ -18,9 +18,9 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 --
 -- Database: `baseline`
 --
-DROP DATABASE `baseline`;
-CREATE DATABASE `baseline` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
-USE `baseline`;
+-- DROP DATABASE `goQuizBase`;
+CREATE DATABASE `goQuizBase` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `goQuizBase`;
 
 -- --------------------------------------------------------
 

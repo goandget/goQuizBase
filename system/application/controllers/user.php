@@ -43,6 +43,8 @@ class User extends CI_Controller {
 
 		$this->form->set_rules('email', 'Email', 'trim|required|valid_email');
 		$this->form->set_rules('school', 'school', 'trim|required');
+		$this->form->set_rules('forename', 'forename', 'trim|required');
+		$this->form->set_rules('surname', 'surname', 'trim|required');
 		$this->form->set_rules('username', 'username', 'trim|required');
 		$this->form->set_rules('password', 'Password', 'trim|required|matches[confirm]');
 
@@ -53,6 +55,8 @@ class User extends CI_Controller {
 			
 			$data['email']    = $this->input->post('email');
 			$data['school'] = $this->input->post('school');
+			$data['forename'] = $this->input->post('forename');
+			$data['surname'] = $this->input->post('surname');
 			$data['username'] = $this->input->post('username');
 			$data['password'] = $this->input->post('password');
 			$schooladmin = $this->input->post('schooladmin');
