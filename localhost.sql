@@ -51,7 +51,7 @@ CREATE TABLE IF NOT EXISTS `accounts` (
 --
 
 INSERT INTO `accounts` (`id`, `email`, `school`, `username`, `password`, `title`, `forename`, `surname`, `class`, `year`, `created`, `modified`, `type`, `ip_address`) VALUES
-(1, 'jhooton@arrowsmith.wigan.sch.uk', 'Admin', 'jmhooton', '92233c65e3908734b050ea32e14ade054ac7dfd1', NULL, NULL, NULL, NULL, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00', NULL, '10.10.1.104');
+(1, 'jhooton@arrowsmith.wigan.sch.uk', 'Admin', 'jmhooton', '92233c65e3908734b050ea32e14ade054ac7dfd1', 'Mr', 'Jonathan', 'Hooton', NULL, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 2, '10.10.1.104');
 
 -- --------------------------------------------------------
 
