@@ -9,7 +9,7 @@
 		<ul>
 			<?php if ($type == 1) {?><li><a href="<?php echo site_url('user/manage'); ?>">Manage Account</a></li><?php } ?>
 			<!--<li><a href="<?=site_url('quiz')?>">Manage My Quizzes</a></li>-->
-			<?php if (strtolower($school) == 'admin') {?><li><a href="<?php echo site_url('quiz/questions'); ?>">Manage the Questions</a></li><?php } ?>
+			<?php if (strtolower($school) == 'admin') {?><li><a href="<?php echo site_url('questions/manage'); ?>">Manage the Questions</a></li><?php } ?>
 			<li><a href="<?php echo site_url('quiz/take'); ?>">Take a Quiz</a></li>
 			<?php if ($type == 1) {?><li><a href="<?php echo site_url('result'); ?>">View Results</a></li><?php } ?>
 			<li><a href="<?php echo site_url('user/logout'); ?>">Logout</a></li>

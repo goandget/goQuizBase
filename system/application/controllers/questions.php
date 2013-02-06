@@ -14,7 +14,12 @@ class Questions extends CI_Controller {
 	public function manage()
 	{
 		// Load the libraries and Models 
-		$this->load->library('form_validation', NULL, 'form');
+		$this->load->library('form_validation', NULL, 'form'); // Load Form Validation
+		$this->load->model('question_model'); // Load the Question Models
+
+		$this->question_model->get_questions();
+
+		$this->load->view('questions/manage');
 
 	}
 	/**
