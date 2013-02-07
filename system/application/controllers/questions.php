@@ -5,6 +5,27 @@ class Questions extends CI_Controller {
 	// --------------------------------------------------------------------
 
 	/**
+	 * Constructor
+	 *
+	 * @access	public
+	 * @return	void
+	 */
+	public function __construct()
+	{
+		parent::__construct();
+
+		if( ! $this->account->logged_in())
+		{
+			redirect('user/login');
+		}
+
+		$this->load->database();
+		$this->load->model('question_model'); // Load the Question Models
+	}
+
+	// --------------------------------------------------------------------
+
+	/**
 	 * Manage all the Questions
 	 *
 	 * @access public
@@ -15,11 +36,10 @@ class Questions extends CI_Controller {
 	{
 		// Load the libraries and Models 
 		$this->load->library('form_validation', NULL, 'form'); // Load Form Validation
-		$this->load->model('question_model'); // Load the Question Models
 
-		$this->question_model->get_questions();
+		$data['questions'] = $this->question_model->get_questions();
 
-		$this->load->view('questions/manage');
+		$this->load->view('questions/manage',$data);
 
 	}
 	/**

@@ -12,15 +12,21 @@
 		<p class="breadcrumbs"><a href="<?php echo site_url();?>/user">Home</a> &raquo; <a href="#">Manage Questions</a></p>
 		<?php foreach($questions as $question): ?>
 		<div class="grid12">
-			<div class="question float-l"><?php echo $question->question;?></div>
-			<td><?php echo $user->username;?></td>
-			<td><?php echo $user->class; ?></td>
-			<td>
+			<div class="question float-l">
 				<div class="float-r">
-					
-					<a href="#<? echo site_url('user/edit/'.$user->id); ?>" onclick="alert('This feature isn\'t available yet!')">edit</a>
-					<a href="<? echo site_url('user/delete/'.$user->id); ?>">del</a>
+					<img src="img/settings.png" alt="Settings Over" />
+					<ul>
+						<li><a href="<?php echo site_url();?>/question/edit">Edit</a></li>
+						<li><a href="<?php echo site_url();?>/question/delete">Delete</a></li>
+						<li class="sep">Updated: <?php echo $question->updated;?></li>
+					</ul>
 				</div>
+				<?php echo $question->question;?>
+			</div>
+			<div class="float-l">
+				<img src="img/level.png" alt="Question Level" />
+				<?php echo $question->level;?>
+			</div>
 		</div>
 		<?php endforeach; ?>
 	</div>
