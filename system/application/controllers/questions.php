@@ -39,9 +39,17 @@ class Questions extends CI_Controller {
 
 		$data['questions'] = $this->question_model->get_questions();
 
+		foreach ($data['questions'] as $q)
+		{
+			$data['questions']['answers'] = $this->question_model->get_questions($q->id);
+		}
+
 		$this->load->view('questions/manage',$data);
 
 	}
+
+	// --------------------------------------------------------------------
+
 	/**
 	 * Add Question
 	 *
