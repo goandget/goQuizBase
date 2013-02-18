@@ -34,14 +34,14 @@ class Questions extends CI_Controller {
 	 */
 	public function manage()
 	{
-		// Load the libraries and Models 
+		// Load the libraries and Models
 		$this->load->library('form_validation', NULL, 'form'); // Load Form Validation
 
 		$data['questions'] = $this->question_model->get_questions();
 
 		foreach ($data['questions'] as $q)
 		{
-			$data['questions']['answers'] = $this->question_model->get_questions($q->id);
+			$data['answers'][$q->id] = $this->question_model->get_answers($q->id);
 		}
 
 		$this->load->view('questions/manage',$data);
@@ -216,7 +216,7 @@ class Questions extends CI_Controller {
 	 * @access	public
 	 * @return	void
 	 */
-	public function delete_question()
+	public function delete()
 	{
 		// We a valid quiz ID
 		if( ! ($quiz_id = $this->uri->segment(3)) || ! is_numeric($quiz_id))

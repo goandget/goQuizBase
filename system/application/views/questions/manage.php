@@ -13,19 +13,6 @@
 		<?php foreach($questions as $question): ?>
 		<div class="grid12">
 			<div>
-				<div class="level float-l">
-					<?php echo $question->level;?>
-				</div>
-				<div class="question float-l">
-					<?php 
-						if ($questions['image'])	{
-					?>
-							<img src="<?php echo base_url();?>img/quiz/1/<?php echo $questions['image'];?>" class="float-l" />
-					<?php
-						}
-					?>
-					<?php echo $question->question;?>
-				</div>
 				<div class="settings float-r">
 					<img src="<?php echo base_url();?>/img/settings_small.png" alt="Settings Over" />
 					<ul>
@@ -35,28 +22,40 @@
 						<li class="sep">Updated: <?php echo $question->updated;?></li>
 					</ul>
 				</div>
+				<div class="level float-l">
+					<?php echo $question->level;?>
+				</div>
+				<div class="question float-l">
+					<?php 
+						if (isset($questions['image']))	{
+					?>
+							<img src="<?php echo base_url();?>img/quiz/1/<?php echo $questions['image'];?>" class="float-l" />
+					<?php
+						}
+					?>
+					<?php echo $question->question;?>
+				</div>
 			</div>
-			<div class="answers">
+			<div class="answers clr-b">
 				<?php if($question->type == 1): ;?>
-
-					
 
 				<?php elseif($question->type == 2): ;?>
 						<?php $id = 'a'; ?>
 						<table>
-						<?php foreach($question->answers as $answer): ;?>
+						<?php foreach($answers[$question->id] as $answer): ;?>
 							<tr>
 								<td><?php echo $id; ?>)</td>
 								<td>
 									<?php echo $answer->answer;?>
 									<?php 
-										if ($answer->image)	{
+										if (isset($answer->image))	{
 									?>
 											<img src="<?php echo base_url();?>img/quiz/1/<?php echo $answer->image;?>" />
 									<?php
 										}
 									?>
 								</td>
+								<td><img src="<?php echo base_url();;?>img/correct<?php echo $answer->correct;?>.png" /></td>
 							</tr>
 						<?php $id++; ;?>
 						<?php endforeach; ;?>
