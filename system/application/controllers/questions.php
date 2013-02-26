@@ -37,14 +37,19 @@ class Questions extends CI_Controller {
 		// Load the libraries and Models
 		$this->load->library('form_validation', NULL, 'form'); // Load Form Validation
 
-		$data['questions'] = $this->question_model->get_questions();
+		$questions = $this->question_model->get_questions();
 
-		foreach ($data['questions'] as $q)
+		$this->load->view('questions/manage-header');
+
+		foreach ($questions as $q)
 		{
-			$data['answers'][$q->id] = $this->question_model->get_answers($q->id);
+			$ans['q'] = $q;
+			$ans['qid'] = $q->id;
+			$ans['answers'] = $this->question_model->get_answers($q->id);
+			$this->load->view('questions/manage/q'.$q->type,$ans);
 		}
 
-		$this->load->view('questions/manage',$data);
+		$this->load->view('questions/manage-footer');
 
 	}
 
