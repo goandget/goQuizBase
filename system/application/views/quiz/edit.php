@@ -36,7 +36,7 @@
 
 		<h2>Questions</h2>
 
-		<?php if(count($questions) > 0): ?>
+		<?php if(count($questions) > 0 && is_array($questions)): ?>
 			<table class="styled">
 				<tr>
 					<th>Question</th>

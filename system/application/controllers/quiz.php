@@ -233,7 +233,12 @@ class Quiz extends CI_Controller {
 	 */
 	public function take()
 	{
-		
+		/*
+		if( ! ($id = $this->uri->segment(3)) || ! is_numeric($id))
+		{
+			redirect('quiz');
+		}
+		*/
 		// Load relevant helpers
 		$this->load->helper('form');
 		$this->load->helper('my_general');

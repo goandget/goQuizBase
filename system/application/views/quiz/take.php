@@ -46,6 +46,9 @@
 
 				<hr>
 			<?php if (isset($next))	{ echo form_hidden('start',$next); ?><?php echo form_submit('next', 'next'); } else {echo form_submit('finish', 'finish');}?>
+			<div id="timeout"><?php echo $questiontime; ?></div>
 		<?php echo form_close();?>
 	</div>
+	<script src="js/jquery-1.9.1.min.js"></script>
+	<script src="js/quiz.js"></script>
 <?php $this->load->view('layout/footer'); ;?>
