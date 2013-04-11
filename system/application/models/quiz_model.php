@@ -230,7 +230,7 @@ class Quiz_model extends CI_Model {
 	public function get_results($instance = FALSE,$start = FALSE)
 	{
 		$this->db->select('start_time,question,image,type,correct,recorded');
-		$this->db->join('questions','results.question_id=questions.id');
+		$this->db->join('questions','results.question_id=questions.id','right');
 		$this->db->join('instances','instances.instance_id=results.instance_id');
 		$this->db->where('instances.instance_id', $instance);
 		if ($start)	

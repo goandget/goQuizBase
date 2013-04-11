@@ -278,6 +278,10 @@ class Quiz extends CI_Controller {
 				$answer['user_id'] = $this->account->get('id');
 				$answer['answer'] = $data['answer'];
 				$answer['question_id'] = $data['question_id'];
+				if (is_array($answer['answer']))
+				{
+					implode('|#|',$data['answer']);
+				}
 				$answer['correct'] = $this->check_answer($data['question_id'],$data['answer']);
 				if (!$this->quiz_model->record_answer($answer))
 				{
@@ -374,7 +378,7 @@ class Quiz extends CI_Controller {
 	// --------------------------------------------------------------------
 
 	/**
-	 * Delete
+	 * Check Answer is Correct
 	 *
 	 * @access	public
 	 * @param 	array
@@ -391,6 +395,18 @@ class Quiz extends CI_Controller {
 		else if ($question['type'] == 2)
 		{
 			return $this->quiz_model->check_multiplechoice_answer($qid,$answer);
+		}
+		else if ($question['type'] == 3)
+		{
+			foreach ($answer as $a)
+			{
+				if (!$this->quiz_model->check_multiplechoice_answer($qid,$a))
+				{
+					return FALSE;
+				}
+			}
+			return TRUE;
+			//return $this->quiz_model->check_multiplechoice_answer($qid,$answer);
 		}
 
 	}
