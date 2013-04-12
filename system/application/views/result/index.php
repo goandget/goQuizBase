@@ -5,7 +5,7 @@
 		<p class="breadcrumbs"><a href="<? echo site_url('user');?>">Home</a> &raquo; <a href="#">Results</a></p>
 
 		<p style="color:red;font-weight:bold;"><?php echo $error;?></p>
-		<div class="float-l">
+		<div>
 			<table>
 				<tr>
 					<th>Name</th>
@@ -13,7 +13,8 @@
 					<th>Class</th>
 					<th>Year</th>
 					<th>Best Result</th>
-					<th>Last Time: Last Result</th>
+					<th>Last Time</th>
+					<th>Last Result</th>
 					<th>Average Result</th>
 					<th>Number Taken</th>
 				</tr>
@@ -24,11 +25,13 @@
 					<td><?php echo $user->class; ?></td>
 					<td><?php echo $user->year; ?></td>
 					<td><?php if(isset($bests[$user->id])) { echo $bests[$user->id]->correct; } else { ?>N/A<?php } ?></td>
-					<td><?php if(isset($lasts[$user->id])) { echo $lasts[$user->id]->start_time; ?>: <?php echo $lasts[$user->id]->correct;  } else { ?>N/A<?php } ?></td>
+					<td><?php if(isset($lasts[$user->id])) { echo $lasts[$user->id]->start_time; } else { ?>N/A<?php } ?></td>
+					<td><?php if(isset($lasts[$user->id])) { echo $lasts[$user->id]->correct;  } else { ?>N/A<?php } ?></td>
 					<td><?php if(isset($averages[$user->id])) { echo (int) ($averages[$user->id]->correct/$averages[$user->id]->taken);  } else { ?>N/A<?php } ?></td>
 					<td><?php if(isset($averages[$user->id])) { echo $averages[$user->id]->taken;  } else { ?>N/A<?php } ?></td>
 				</tr>
 				<?php endforeach; ?>
 			</table>
 		</div>
+	</div>
 <?php $this->load->view('layout/footer'); ?>

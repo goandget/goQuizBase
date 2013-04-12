@@ -278,11 +278,11 @@ class Quiz extends CI_Controller {
 				$answer['user_id'] = $this->account->get('id');
 				$answer['answer'] = $data['answer'];
 				$answer['question_id'] = $data['question_id'];
+				$answer['correct'] = $this->check_answer($data['question_id'],$data['answer']);
 				if (is_array($answer['answer']))
 				{
-					implode('|#|',$data['answer']);
+					$answer['answer']= implode('|#|',$data['answer']);
 				}
-				$answer['correct'] = $this->check_answer($data['question_id'],$data['answer']);
 				if (!$this->quiz_model->record_answer($answer))
 				{
 					$start = $start - 1;
