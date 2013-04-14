@@ -111,8 +111,13 @@ class User extends CI_Controller {
         $config['upload_path'] = './uploads/'; // happens to be my test upload path
         $config['allowed_types'] = 'csv';    
         $config['max_size']    = '500'; 
+<<<<<<< HEAD
 	$this->load->library('upload', $config);
 	    
+=======
+		$this->load->library('upload', $config);
+	     
+>>>>>>> 4bfb2e9954811216e6b0c66358e7f8352e24d998
         if ( (! $this->upload->do_upload('file')) && (!$this->input->post('email')))
         {
             $data['error'] = $this->upload->display_errors();
