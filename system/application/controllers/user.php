@@ -111,7 +111,7 @@ class User extends CI_Controller {
         $config['upload_path'] = './uploads/'; // happens to be my test upload path
         $config['allowed_types'] = 'csv';    
         $config['max_size']    = '500'; 
-		$this->load->library('upload', $config);
+	$this->load->library('upload', $config);
 	    
         if ( (! $this->upload->do_upload('file')) && (!$this->input->post('email')))
         {
@@ -121,6 +121,30 @@ class User extends CI_Controller {
         else if (!$this->input->post('email'))
         {
             print_r($this->upload->data());
+            // Store the details of the file uploaded.
+            $upload = $this->upload->data();
+            
+            // Load CSV Reader library
+            $this->load->library('csvreader');
+            
+            // Parse the csv file into the variable users
+            $users = $this->parse_file($upload['full_path'],True);
+            
+            //  Load the database and the model for saving users data
+	    $this->load->database();
+	    $this->load->model('account_model');
+
+	    foreach ($users as $user)
+	    {
+	    	    $data = array();
+		    $data['email']    = $user['email'];
+		    $data['school'] = $this->input->post('school');
+		    $data['forename'] =$user['forename'];
+		    $data['surname'] = $user['surname'];
+		    $data['username'] = $user['username'];
+		    $data['password'] = $user['password'];
+		    $schooladmin = $this->input->post('schooladmin');
+	    }
         }
         else if (empty($_FILES['file']['name']))
         {
