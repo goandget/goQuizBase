@@ -112,7 +112,7 @@ class User extends CI_Controller {
         $config['allowed_types'] = 'csv';    
         $config['max_size']    = '500'; 
 		$this->load->library('upload', $config);
-	    
+	     
         if ( (! $this->upload->do_upload('file')) && (!$this->input->post('email')))
         {
             $data['error'] = $this->upload->display_errors();
