@@ -108,10 +108,33 @@ class User extends CI_Controller {
 
 		$this->load->library('form_validation', NULL, 'form');
 
-		$this->form->set_rules('email', 'Email', 'trim|required|valid_email');
-		$this->form->set_rules('school', 'school', 'trim|required');
-		$this->form->set_rules('username', 'username', 'trim|required');
-		$this->form->set_rules('password', 'Password', 'trim|required|matches[confirm]');
+        $config['upload_path'] = './uploads/'; // happens to be my test upload path
+        $config['allowed_types'] = 'csv';    
+        $config['max_size']    = '500'; 
+		$this->load->library('upload', $config);
+	    
+        if ( (! $this->upload->do_upload('file')) && (!$this->input->post('email')))
+        {
+            $data['error'] = $this->upload->display_errors();
+         
+        }
+        else if (!$this->input->post('email'))
+        {
+            print_r($this->upload->data());
+        }
+        else if (empty($_FILES['file']['name']))
+        {
+        	$data['error'] = 'The filetype you are attempting to upload is not allowed.';
+        }
+        else {
+		
+			$this->form->set_rules('email', 'Email', 'trim|required|valid_email');
+			$this->form->set_rules('school', 'school', 'trim|required');
+			$this->form->set_rules('username', 'username', 'trim|required');
+			$this->form->set_rules('password', 'Password', 'trim|required|matches[confirm]');
+
+        }
+		
 
 		if($this->form->run())
 		{
@@ -121,14 +144,19 @@ class User extends CI_Controller {
 	        
 	        $this->load->library('upload', $config);
 	    
-	        /*if ( ! $this->upload->do_upload())
+	        if ( ! $this->upload->do_upload())
 	        {
+	        	print_r($this->upload->data());
 	            echo $this->upload->display_errors();
+	            echo 'hell';
+	            die;
 	        }
 	        else
 	        {
+	            echo $this->upload->display_errors();
 	            echo "worked";
-	        }*/
+	            die;
+	        }
 			
 			$data['email']    = $this->input->post('email');
 			$data['school'] = $this->input->post('school');
