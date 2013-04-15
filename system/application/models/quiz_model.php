@@ -229,7 +229,7 @@ class Quiz_model extends CI_Model {
 	//public function get_questions($id, $override_limit = FALSE)
 	public function get_results($instance = FALSE,$start = FALSE)
 	{
-		$this->db->select('start_time,question,image,type,correct,recorded');
+		$this->db->select('start_time,question,image,type,correct,recorded,answer');
 		$this->db->join('questions','results.question_id=questions.id','right');
 		$this->db->join('instances','instances.instance_id=results.instance_id');
 		$this->db->where('instances.instance_id', $instance);
@@ -238,6 +238,41 @@ class Quiz_model extends CI_Model {
 			$this->db->limit(1,$start-10);
 		}
 		$query = $this->db->get('results');
+		
+		if($query->num_rows() > 0)
+		{
+			return $query->result();
+		}
+		else
+		{
+			return FALSE;
+		}
+	}
+
+	// --------------------------------------------------------------------
+
+	/**
+	 * Get Display Results
+	 *
+	 * @access	public
+	 * @param	int
+	 * @param	int
+	 * @return	array
+	 */
+	//public function get_questions($id, $override_limit = FALSE)
+	public function get_users_answers($answer = FALSE,$correct = False)
+	{
+		if ($correct)
+		{
+			$this->db->select('answer,image,correct');
+		}
+		else
+		{
+			$this->db->select('answer,image');
+		}
+		$this->db->where('id', $answer);
+		
+		$query = $this->db->get('answers');
 		
 		if($query->num_rows() > 0)
 		{

@@ -320,6 +320,10 @@ class Quiz extends CI_Controller {
 
 		if ($data['finish']!='')	{
 			$question['results'] = $this->quiz_model->get_results($this->account->get_instance());
+			for ($i = 0; count($question['results']) > $i; $i++)
+			{
+				$question['results'][$i]->answers = $this->get_answers($question['results'][$i]->type,$question['results'][$i]->answer);
+			}
 			$this->quiz_model->instance_finish($this->account->get_instance());
 			$this->account->set_instance(FALSE);
 			$question['finish'] = TRUE;
@@ -425,5 +429,43 @@ class Quiz extends CI_Controller {
 
 		$question =	$this->quiz_model->get_results($instance);
 
+	}
+
+	// --------------------------------------------------------------------
+
+	/**
+	 * Display the Results either so far or complete results
+	 *
+	 * @access	public
+	 * @param 	int
+	 * @return	void
+	 */
+	private function get_answers($type = 1,$answer = False)
+	{
+		if ($answer)
+		{
+			switch ($type):
+				case 1:
+					return $answer;
+					break;
+				case 2:
+					return $this->quiz_model->get_users_answers($answer,False);
+					break;
+				case 3: 
+					$answers = explode('|#|',$answer);
+					$result = array();
+					foreach ($answers as $a)
+					{
+						array_push($result,$this->quiz_model->get_users_answers($a,True));
+					}
+					return $result;
+				default:
+					return $answer;
+			endswitch;
+		}
+		else
+		{
+			return False;
+		}
 	}
 }
