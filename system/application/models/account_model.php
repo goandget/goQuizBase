@@ -56,8 +56,13 @@ class Account_model extends CI_Model {
 			'forename'   => $data['forename'],
 			'surname'   => $data['surname'],
 			'username'   => $data['username'],
+			'class'   => $data['class'],
+			'form'   => $data['form'],
+			'year'   => $data['year'],
+			'title'   => $data['title'],
+			'type'   => $data['type'],
 			'password'   => $this->encrypt_password($data['username'], $data['password']),
-			'ip_address' => $this->input->ip_address(),
+			'ip_address' => $this->input->ip_address()
 		);
 
 		$this->db->insert('accounts', $account);

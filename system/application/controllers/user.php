@@ -111,45 +111,53 @@ class User extends CI_Controller {
         $config['upload_path'] = './uploads/'; // happens to be my test upload path
         $config['allowed_types'] = 'csv';    
         $config['max_size']    = '500'; 
-<<<<<<< HEAD
-	$this->load->library('upload', $config);
-	    
-=======
+
 		$this->load->library('upload', $config);
-	     
->>>>>>> 4bfb2e9954811216e6b0c66358e7f8352e24d998
+
         if ( (! $this->upload->do_upload('file')) && (!$this->input->post('email')))
         {
             $data['error'] = $this->upload->display_errors();
-         
         }
         else if (!$this->input->post('email'))
         {
-            print_r($this->upload->data());
+            // /print_r($this->upload->data());
             // Store the details of the file uploaded.
             $upload = $this->upload->data();
             
             // Load CSV Reader library
-            $this->load->library('csvreader');
+            $this->load->library('CSVReader');
             
             // Parse the csv file into the variable users
-            $users = $this->parse_file($upload['full_path'],True);
+            $users = $this->csvreader->parse_file($upload['full_path'],True);
             
             //  Load the database and the model for saving users data
-	    $this->load->database();
-	    $this->load->model('account_model');
+		    $this->load->database();
+		    $this->load->model('account_model');
 
-	    foreach ($users as $user)
-	    {
-	    	    $data = array();
-		    $data['email']    = $user['email'];
-		    $data['school'] = $this->input->post('school');
-		    $data['forename'] =$user['forename'];
-		    $data['surname'] = $user['surname'];
-		    $data['username'] = $user['username'];
-		    $data['password'] = $user['password'];
-		    $schooladmin = $this->input->post('schooladmin');
-	    }
+		    foreach ($users as $user)
+		    {
+		    	$data = array();
+			    $data['email']    = $user['email'];
+			    if (True == False)
+			    {
+
+			    }
+			    else 
+			    {
+			    	$data['school'] = $this->input->post('school');
+			    }
+			    $data['forename'] =$user['forename'];
+			    $data['surname'] = $user['surname'];
+			    $data['username'] = $user['username'];
+			    $data['password'] = $user['password'];
+			    $data['class'] = $user['class'];
+			    $data['year'] = $user['year'];
+			    $data['form'] = $user['form'];
+			    $data['type'] = $user['type'];
+			    $data['title'] = $user['title'];
+
+			    $this->account_model->create($data);
+		    }
         }
         else if (empty($_FILES['file']['name']))
         {
