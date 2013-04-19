@@ -226,19 +226,57 @@ class Questions extends CI_Controller {
 		// We a valid quiz ID
 		if( ! ($quiz_id = $this->uri->segment(3)) || ! is_numeric($quiz_id))
 		{
-			redirect('quiz');
+			redirect('questions/manage');
 		}
 		
 		// We also need a valid question ID
 		if( ! ($id = $this->uri->segment(4)) || ! is_numeric($id))
 		{
-			redirect('quiz');
+			redirect('questions/manage');
 		}
 
 		$this->load->model('question_model');
 
 		$this->question_model->delete($id);
 
-		redirect('quiz/edit/' . $quiz_id);
+		redirect('questions/manage');
+	}
+
+
+	/**
+	 * Update Questions Details
+	 *
+	 * @access	public
+	 * @return	void
+	 */
+	public function update($type = False,$data = false,$ajax = false)
+	{
+		if ($type and $data)
+		{
+			$this->load->model('question_model');
+			switch ($type):
+				case "level":
+					$this->question_model->update_level($data['id'],$data['level']);
+					break;
+				case "qpicture":
+					$this->question_model->update_question_picture($data['id'],$data['qpicture']);
+					break;
+				case "full":
+					$this->question_model->update_question($data);
+					break;
+				default:
+					$this->question_model->update_question($data);
+			endswitch;
+			/*if ($ajax)
+			{
+				// $this->load->view('quiz/add_question', compact('id', 'error', 'types'));
+			}
+			else
+			{*/
+				redirect('questions/manage');
+			/*}*/
+		}
+
+
 	}
 }

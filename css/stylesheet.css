@@ -250,7 +250,15 @@ table.styled td {
 .grid12 
 {
 	background: #FF6600;
-  padding-top: 10px;
+}
+.grid12 .answers
+{
+  display: none;
+}
+.grid12 .question
+{
+  max-height: 40px;
+  overflow: hidden;
 }
 .float-l
 {
@@ -275,4 +283,12 @@ table.styled td {
 .clr-r
 {
 	clear: right;
+}
+.editable
+{
+
+}
+.save
+{
+  
 }
