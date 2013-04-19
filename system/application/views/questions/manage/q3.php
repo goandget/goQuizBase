@@ -24,7 +24,26 @@
 				</div>
 			</div>
 			<div class="answers clr-b">
-				This type question must be manually marked.
+						<?php $id = 'a'; ?>
+						<table>
+						<?php foreach($answers as $answer): ;?>
+							<tr>
+								<td><?php echo $id; ?>)</td>
+								<td>
+									<?php echo $answer->answer;?>
+									<?php 
+										if (isset($answer->image))	{
+									?>
+											<img src="<?php echo base_url();?>img/quiz/1/<?php echo $answer->image;?>" />
+									<?php
+										}
+									?>
+								</td>
+								<td><img src="<?php echo base_url();?>img/correct<?php echo $answer->correct;?>.png" /></td>
+							</tr>
+						<?php $id++; ;?>
+						<?php endforeach; ;?>
+						</table>
 			</div>
 			<div class="clr-b"></div>
 		</div>

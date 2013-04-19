@@ -47,3 +47,4 @@
 			</div>
 			<div class="clr-b"></div>
 		</div>
+		<hr>

@@ -67,7 +67,7 @@
 
 			<?php echo form_close();?>
 		</div>
-		<div class="float-l">
+		<div>
 			<table>
 				<tr>
 					<th>Name</th>
