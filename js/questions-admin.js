@@ -27,8 +27,19 @@ $(document).click(function() {
     $(".save").hide();
 });
 
-$('.editable').click(function (e) {
-	alert('hi');
-    $(this).next(".save").show();
-    e.stopPropagation();
+$(document).ready(function() {
+	$('.editable').click(function (e) {
+	    $(this).children(".save").show();
+	    e.stopPropagation();
+	});
+
+	$('.save').click(function(e)
+	{
+		alert($(this).parent('.editable').html().replace('<button class="save">Save</button>',''));
+		/*$.ajax({
+			url:,
+			type:,
+			data:
+		});*/
+	});
 });

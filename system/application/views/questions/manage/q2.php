@@ -9,8 +9,9 @@
 						<li class="sep">Updated: <?php echo $q->updated;?></li>
 					</ul>
 				</div>
-				<div class="level float-l">
+				<div class="level float-l editable" contentEditable="true">
 					<?php echo $q->level;?>
+					<button class="save">Save</button>
 				</div>
 				<div class="question float-l">
 					<?php 

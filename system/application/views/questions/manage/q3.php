@@ -3,7 +3,7 @@
 				<div class="settings float-r">
 					<img src="<?php echo base_url();?>/img/settings_small.png" alt="Settings Over" />
 					<ul>
-						<li><a href="" onc>View</a></li>
+						<li><a href="">View</a></li>
 						<li><a href="<?php echo site_url();?>/questions/edit">Edit</a></li>
 						<li><a href="<?php echo site_url();?>/questions/delete">Delete</a></li>
 						<li class="sep">Updated: <?php echo $q->updated;?></li>
