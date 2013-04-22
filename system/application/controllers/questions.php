@@ -251,15 +251,47 @@ class Questions extends CI_Controller {
 	 */
 	public function update($type = False,$data = false,$ajax = false)
 	{
-		if ($type and $data)
+		if ($this->input->post('type'))
+		{
+			$type = $this->input->post('type');
+		}
+		else {
+			$type = False;
+		}
+
+		if ($this->input->post('data'))
+		{
+			$data = explode('#',$this->input->post('data'));
+			$data['id'] = $data[1];
+			$data['value'] = $data[0];
+
+		}
+		else
+		{
+			$data = False;
+		}
+
+		if ($this->input->post('ajax'))
+		{
+			$ajax = $this->input->post('ajax');
+		}
+		else
+		{
+			$ajax = False;
+		}
+
+		if ($type && $data)
 		{
 			$this->load->model('question_model');
 			switch ($type):
 				case "level":
-					$this->question_model->update_level($data['id'],$data['level']);
+					$this->question_model->update_level($data['id'],$data['value']);
 					break;
 				case "qpicture":
-					$this->question_model->update_question_picture($data['id'],$data['qpicture']);
+					$this->question_model->update_question_picture($data['id'],$data['value']);
+					break;
+				case "question":
+					$this->question_model->update_question($data['id'],$data['value']);
 					break;
 				case "full":
 					$this->question_model->update_question($data);
@@ -272,7 +304,7 @@ class Questions extends CI_Controller {
 				// $this->load->view('quiz/add_question', compact('id', 'error', 'types'));
 			}
 			else
-			{*/
+			{
 				redirect('questions/manage');
 			/*}*/
 		}

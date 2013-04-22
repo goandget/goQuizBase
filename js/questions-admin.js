@@ -29,17 +29,33 @@ $(document).click(function() {
 
 $(document).ready(function() {
 	$('.editable').click(function (e) {
+    	$(".save").hide();
 	    $(this).children(".save").show();
 	    e.stopPropagation();
 	});
 
 	$('.save').click(function(e)
 	{
-		alert($(this).parent('.editable').html().replace('<button class="save">Save</button>',''));
-		/*$.ajax({
-			url:,
-			type:,
-			data:
-		});*/
+		var result = $(this).parent('.editable').html().replace(/<button .*<\/button>/,'');
+		result += '#'+$(this).closest('.grid12').children('.id').html();
+		
+		var type = $(this).attr('class').replace('save ','');
+		
+		$.ajax({
+			url: 'http://localhost/~jonathan/goQuizBase/index.php/questions/update',
+			type: 'POST',
+			data: {
+				type: type,
+				data: result,
+				ajax: 1
+			},
+			success:function (data) {
+				alert(data);
+			}
+		});
 	});
+
+	$(".save").hide();
 });
+
+

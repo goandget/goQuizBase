@@ -9,8 +9,9 @@
 						<li class="sep">Updated: <?php echo $q->updated;?></li>
 					</ul>
 				</div>
-				<div class="level float-l">
+				<div class="level float-l editable" contentEditable="true">
 					<?php echo $q->level;?>
+					<button class="save level">Save</button>
 				</div>
 				<div class="question float-l">
 					<?php 
@@ -20,7 +21,7 @@
 					<?php
 						}
 					?>
-					<?php echo $q->question;?>
+					<div class="editable" contentEditable="true"><?php echo $q->question;?><button class="save question">Save</button></div>
 				</div>
 			</div>
 			<div class="answers clr-b">

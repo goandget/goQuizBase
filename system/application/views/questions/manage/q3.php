@@ -1,4 +1,5 @@
 		<div class="grid12">
+			<div class="id"><?php echo $q->id;?></div>
 			<div>
 				<div class="settings float-r">
 					<img src="<?php echo base_url();?>/img/settings_small.png" alt="Settings Over" />
@@ -11,7 +12,7 @@
 				</div>
 				<div class="editable level float-l" contentEditable="true">
 					<?php echo $q->level;?>
-					<button class="save">Save</button>
+					<button class="save level">Save</button>
 				</div>
 				<div class="question float-l">
 					<?php 
@@ -21,7 +22,7 @@
 					<?php
 						}
 					?>
-					<div class="editable" contentEditable="true"><?php echo $q->question;?><button class="save">Save</button></div>
+					<div class="editable" contentEditable="true"><?php echo $q->question;?><button class="save question">Save</button></div>
 				</div>
 			</div>
 			<div class="answers clr-b">
