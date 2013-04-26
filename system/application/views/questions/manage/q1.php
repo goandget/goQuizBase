@@ -1,11 +1,12 @@
 		<div class="grid12">
+			<div class="hidden id"><?php echo $q->id;?></div>
 			<div>
 				<div class="settings float-r">
 					<img src="<?php echo base_url();?>/img/settings_small.png" alt="Settings Over" />
 					<ul>
-						<li><a href="" onc>View</a></li>
+						<li><a href="#" class="setting">View</a></li>
 						<li><a href="<?php echo site_url();?>/questions/edit">Edit</a></li>
-						<li><a href="<?php echo site_url();?>/questions/delete">Delete</a></li>
+						<li><a href="#" class="setting">Delete</a></li>
 						<li class="sep">Updated: <?php echo $q->updated;?></li>
 					</ul>
 				</div>

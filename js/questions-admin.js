@@ -28,6 +28,12 @@ $(document).click(function() {
 });
 
 $(document).ready(function() {
+	/*
+	 *	Set up the page 
+	 */
+	 $('.answers').toggle(); // Hide Answers.
+
+
 	$('.editable').click(function (e) {
     	$(".save").hide();
 	    $(this).children(".save").show();
@@ -42,20 +48,85 @@ $(document).ready(function() {
 		var type = $(this).attr('class').replace('save ','');
 		
 		$.ajax({
-			url: 'http://localhost/~jonathan/goQuizBase/index.php/questions/update',
+			url: 'http://localhost/~administrator/goQuizBase/index.php/questions/update',
 			type: 'POST',
+			dataType: "xml",        
 			data: {
 				type: type,
 				data: result,
 				ajax: 1
 			},
 			success:function (data) {
-				alert(data);
+
+                    $('#alert').remove();
+
+                    var $message = $(data).find('message');
+
+                    var html = '<div id="alert" class="' + $message.find('type').text() + '">';                    
+
+                    html += '<h3>' + $message.find('title').text() + '</h3>';
+
+                    html += '<div class="message">' + $message.find('content').text()  + '</div>';                   
+
+                    html += '</div>';
+
+                    $('#container').prepend(html);
+                    $('#alert').toggle();
+                    $(".save").hide();
+                    $('#alert').slideDown('slow').delay(3000).slideUp('slow');
 			}
 		});
+	});
+
+	$('a.setting').click(function(e)
+	{
+		alert($(this).html());
+		if ($(this).html() == 'Delete')
+		{
+			delete_question($(this).closest('.grid12').children('.id').html());
+			$(this).closest('.grid12').slideUp('slow');
+		}
+		else if ($(this).html() == 'View')
+		{
+			alert('hi');
+			$(this).closest('.answers').slideDown('slow');
+		}
+		e.preventDefault();
+
 	});
 
 	$(".save").hide();
 });
 
+function delete_question(id)
+{
+	alert(id);
+	$.ajax({
+		url: 'http://localhost/~administrator/goQuizBase/index.php/questions/delete',
+		type: 'POST',
+		dataType: "text",        
+		data: {
+			id: id,
+			type: 'question',
+			ajax: 1
+		},
+		success:function (data) {
+				
+                $('#alert').remove();
 
+                var $message = $(data).find('message');
+
+                var html = '<div id="alert" class="' + $message.find('type').text() + '">';                    
+
+                html += '<h3>' + $message.find('title').text() + '</h3>';
+
+                html += '<div class="message">' + $message.find('content').text()  + '</div>';                   
+
+                html += '</div>';
+
+                $('#container').prepend(html);
+                $('#alert').toggle();
+                $('#alert').slideDown('slow').delay(3000).slideUp('slow');
+		}
+	});
+}

@@ -7,11 +7,23 @@ class Question_model extends CI_Model {
 		// Delete the Question
 		$this->db->where('id', $id);
 		$this->db->limit(1);
-		$this->db->delete('questions');
-
+		if ($this->db->delete('questions'))
+		{
+			$return = True;
+		}
+		
 		// Delete the Answers Connected to this question.
 		$this->db->where('question_id',$id);
-		$this->db->delete('answers');
+		if($this->db->delete('answers') && $return)
+		{
+		
+			return True;
+		}
+		else
+		{
+			return False;
+		}
+
 	}
 
 	// Return the questions for managing.
@@ -57,6 +69,70 @@ class Question_model extends CI_Model {
 		else
 		{
 			return FALSE;
+		}
+	}
+
+	// --------------------------------------------------------------------
+
+	/**
+	 * Update Question
+	 *
+	 * @access	public
+	 * @param	int
+	 * @param 	string
+	 * @return	array
+	 */
+	//public function get_questions($id, $override_limit = FALSE)
+	public function update_question($id,$value = False)
+	{
+
+		if ($value)
+		{
+			$data = array('question'=>$value,'updated'=>date('Y-m-d H:i:s'));
+
+			$this->db->where('id', $id);
+			
+			if($this->db->update('questions',$data))
+			{
+				return True;
+			}
+			else
+			{
+				return False;
+			}
+
+		}
+	}
+
+	// --------------------------------------------------------------------
+
+	/**
+	 * Update Level of Question
+	 *
+	 * @access	public
+	 * @param	int
+	 * @param 	string
+	 * @return	array
+	 */
+	//public function get_questions($id, $override_limit = FALSE)
+	public function update_level($id,$value = False)
+	{
+
+		if ($value)
+		{
+			$data = array('level'=>$value,'updated'=>'now()');
+
+			$this->db->where('id', $id);
+			
+			if($this->db->update('questions',$data))
+			{
+				return True;
+			}
+			else
+			{
+				return False;
+			}
+
 		}
 	}
 

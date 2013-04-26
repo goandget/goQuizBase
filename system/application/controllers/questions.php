@@ -213,35 +213,6 @@ class Questions extends CI_Controller {
 		$this->db->insert('questions', $data);
 	}
 
-	// --------------------------------------------------------------------
-
-	/**
-	 * Delete Question
-	 *
-	 * @access	public
-	 * @return	void
-	 */
-	public function delete()
-	{
-		// We a valid quiz ID
-		if( ! ($quiz_id = $this->uri->segment(3)) || ! is_numeric($quiz_id))
-		{
-			redirect('questions/manage');
-		}
-		
-		// We also need a valid question ID
-		if( ! ($id = $this->uri->segment(4)) || ! is_numeric($id))
-		{
-			redirect('questions/manage');
-		}
-
-		$this->load->model('question_model');
-
-		$this->question_model->delete($id);
-
-		redirect('questions/manage');
-	}
-
 
 	/**
 	 * Update Questions Details
@@ -261,9 +232,10 @@ class Questions extends CI_Controller {
 
 		if ($this->input->post('data'))
 		{
-			$data = explode('#',$this->input->post('data'));
-			$data['id'] = $data[1];
-			$data['value'] = $data[0];
+			$array = explode('#',$this->input->post('data'));
+			$data['id'] = $array[1];
+			$data['value'] = $array[0];
+			unset($array);
 
 		}
 		else
@@ -280,35 +252,107 @@ class Questions extends CI_Controller {
 			$ajax = False;
 		}
 
+		
 		if ($type && $data)
 		{
 			$this->load->model('question_model');
 			switch ($type):
 				case "level":
-					$this->question_model->update_level($data['id'],$data['value']);
+					$result = $this->question_model->update_level($data['id'],$data['value']);
 					break;
 				case "qpicture":
-					$this->question_model->update_question_picture($data['id'],$data['value']);
+					$result = $this->question_model->update_question_picture($data['id'],$data['value']);
 					break;
 				case "question":
-					$this->question_model->update_question($data['id'],$data['value']);
+					$result = $this->question_model->update_question($data['id'],$data['value']);
 					break;
 				case "full":
-					$this->question_model->update_question($data);
+					$result = $this->question_model->update_question($data);
 					break;
 				default:
-					$this->question_model->update_question($data);
+					$result = $this->question_model->update_question($data);
 			endswitch;
-			/*if ($ajax)
+			
+			if ($ajax)
 			{
-				// $this->load->view('quiz/add_question', compact('id', 'error', 'types'));
+				if ($result)
+				{	
+					$result = array();
+					$result['title'] = 'Success';
+					$result['message'] = 'The question was updated succesfully';
+					$result['type'] = 'success';
+				}
+				else
+				{
+					$result = array();
+					$result['title'] = 'Error';
+					$result['message'] = 'There was an error updating the question';
+					$result['type'] = 'error';
+				}
+				$this->load->view('questions/ajax', array('result' => $result));
 			}
 			else
 			{
-				redirect('questions/manage');
-			/*}*/
+				redirect('questions/manage/'.$result);
+			}
 		}
 
 
+	}
+
+	/**
+	 * Delete Questions Details
+	 *
+	 * @access	public
+	 * @return	void
+	 */
+	public function delete($type=False,$id=False,$ajax = False)
+	{
+		if ($this->input->post('type'))
+		{
+			$type = $this->input->post('type');
+		}
+
+		if ($this->input->post('id'))
+		{
+			$id = $this->input->post('id');
+		}
+
+		if ($this->input->post('ajax'))
+		{
+			$ajax = $this->input->post('ajax');
+		}
+
+		if ($type && $id)
+		{
+
+			$this->load->model('question_model');
+
+			$result = $this->question_model->delete($id);
+
+		}
+
+		if ($ajax)
+		{
+				if ($result)
+				{	
+					$result = array();
+					$result['title'] = 'Success';
+					$result['message'] = 'The question was updated succesfully';
+					$result['type'] = 'success';
+				}
+				else
+				{
+					$result = array();
+					$result['title'] = 'Error';
+					$result['message'] = 'There was an error updating the question';
+					$result['type'] = 'error';
+				}
+				$this->load->view('questions/ajax', array('result' => $result));
+		}
+		else
+		{
+			redirect('questions/manage/'.$result);
+		}
 	}
 }

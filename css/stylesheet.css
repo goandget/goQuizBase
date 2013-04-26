@@ -253,12 +253,11 @@ table.styled td {
 }
 .grid12 .answers
 {
-  display: none;
 }
 .grid12 .question
 {
-  max-height: 40px;
-  overflow: hidden;
+  /*max-height: 40px;
+  overflow: hidden;*/
 }
 .float-l
 {
@@ -284,6 +283,10 @@ table.styled td {
 {
 	clear: right;
 }
+.hidden
+{
+  display: none;
+}
 .editable
 {
 
@@ -291,4 +294,8 @@ table.styled td {
 .save
 {
   
+}
+#timeout
+{
+  display: none;
 }
