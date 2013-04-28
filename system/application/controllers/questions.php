@@ -266,6 +266,9 @@ class Questions extends CI_Controller {
 				case "question":
 					$result = $this->question_model->update_question($data['id'],$data['value']);
 					break;
+				case "answer":
+					$result = $this->question_model->update_answer($data['id'],$data['value']);
+					break;
 				case "full":
 					$result = $this->question_model->update_question($data);
 					break;

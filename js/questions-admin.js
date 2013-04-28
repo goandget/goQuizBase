@@ -42,13 +42,14 @@ $(document).ready(function() {
 
 	$('.save').click(function(e)
 	{
+
 		var result = $(this).parent('.editable').html().replace(/<button .*<\/button>/,'');
 		result += '#'+$(this).closest('.grid12').children('.id').html();
 		
 		var type = $(this).attr('class').replace('save ','');
 		
 		$.ajax({
-			url: 'http://localhost/~administrator/goQuizBase/index.php/questions/update',
+			url: base_url + 'index.php/questions/update',
 			type: 'POST',
 			dataType: "xml",        
 			data: {
@@ -80,16 +81,22 @@ $(document).ready(function() {
 
 	$('a.setting').click(function(e)
 	{
-		alert($(this).html());
 		if ($(this).html() == 'Delete')
 		{
 			delete_question($(this).closest('.grid12').children('.id').html());
 			$(this).closest('.grid12').slideUp('slow');
 		}
-		else if ($(this).html() == 'View')
+		else if ($(this).html() == 'View' || $(this).html() == 'Hide' )
 		{
-			alert('hi');
-			$(this).closest('.answers').slideDown('slow');
+			$(this).closest('.grid12').children('.answers').slideToggle('slow');
+			if ($(this).html() == 'View')
+			{
+				$(this).html('Hide');
+			}
+			else 
+			{
+				$(this).html('View');
+			}
 		}
 		e.preventDefault();
 
@@ -102,7 +109,7 @@ function delete_question(id)
 {
 	alert(id);
 	$.ajax({
-		url: 'http://localhost/~administrator/goQuizBase/index.php/questions/delete',
+		url: base_url + 'index.php/questions/delete',
 		type: 'POST',
 		dataType: "text",        
 		data: {

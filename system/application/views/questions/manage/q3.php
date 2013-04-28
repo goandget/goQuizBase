@@ -32,7 +32,10 @@
 							<tr>
 								<td><?php echo $id; ?>)</td>
 								<td>
-									<?php echo $answer->answer;?>
+									<div class="editable" contentEditable="true">
+										<?php echo $answer->answer;?>
+										<button class="save answer">Save</button>
+									</div>
 									<?php 
 										if (isset($answer->image))	{
 									?>

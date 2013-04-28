@@ -4,8 +4,8 @@
 <head>
 	<meta charset="utf-8">
 	<title>Baseline Testing Site</title>
-
-	<link rel="stylesheet" href="<?=base_url()?>css/stylesheet.css" type="text/css" />
+	<base href="<?=base_url()?>">
+	<link rel="stylesheet" href="css/stylesheet.css" type="text/css" />
 </head>
 <body>
 
