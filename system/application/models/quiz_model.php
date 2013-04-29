@@ -390,4 +390,27 @@ class Quiz_model extends CI_Model {
 			return FALSE;
 		}
 	}
+
+	// --------------------------------------------------------------------
+
+	/**
+	 * Assign the Quizzes
+	 *
+	 * Assign the quiz to individuals or classes.
+	 *
+	 * @access	public
+	 * @access	int
+	 * @return	void
+	 */
+	public function assign($data)
+	{
+		if ($this->db->insert('assign',$data))
+		{
+			return TRUE;
+		}
+		else
+		{
+			return FALSE;
+		}
+	}
 }

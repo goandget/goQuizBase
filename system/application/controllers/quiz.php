@@ -220,6 +220,7 @@ class Quiz extends CI_Controller {
 
 		$this->load->view('quiz/enter', $quizzes);
 	}
+
 	// --------------------------------------------------------------------
 
 	/**
@@ -248,6 +249,72 @@ class Quiz extends CI_Controller {
 		}
 		$this->load->view('quiz/assign', $data);
 	}
+	
+	// --------------------------------------------------------------------
+
+	/**
+	 * Assign the Quiz
+	 * Give Pupils Access to the Quiz
+	 *
+	 * @access	public
+	 * @return	void
+	 */
+	public function set_assign($id=False,$qid=False,$attempts=False,$ajax = False)
+	{
+
+		if ($this->input->post('id'))
+		{
+			$id = $this->input->post('id');
+		}
+
+		if ($this->input->post('qid'))
+		{
+			$id = $this->input->post('qid');
+		}
+
+		if ($this->input->post('attempts'))
+		{
+			$attempts = $this->input->post('attempts');
+		}
+
+		if ($this->input->post('ajax'))
+		{
+			$ajax = $this->input->post('ajax');
+		}
+
+		if ($id)
+		{
+
+			$this->load->model('quiz_model');
+
+			$result = $this->quiz_model->assign(array('assign'=>$id,'qid'=>1,'attempts'=>$attempts));
+
+		}
+
+		if ($ajax)
+		{
+				if ($result)
+				{	
+					$result = array();
+					$result['title'] = 'Success';
+					$result['message'] = 'The Quiz has been assigned';
+					$result['type'] = 'success';
+				}
+				else
+				{
+					$result = array();
+					$result['title'] = 'Error';
+					$result['message'] = 'There was an error assigning the quiz';
+					$result['type'] = 'error';
+				}
+				$this->load->view('ajax', array('result' => $result));
+		}
+		else
+		{
+			redirect('questions/manage/'.$result);
+		}
+	}
+
 	// --------------------------------------------------------------------
 
 	/**

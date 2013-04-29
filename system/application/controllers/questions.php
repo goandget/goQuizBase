@@ -295,7 +295,7 @@ class Questions extends CI_Controller {
 					$result['message'] = 'There was an error updating the question';
 					$result['type'] = 'error';
 				}
-				$this->load->view('questions/ajax', array('result' => $result));
+				$this->load->view('ajax', array('result' => $result));
 			}
 			else
 			{
@@ -354,7 +354,7 @@ class Questions extends CI_Controller {
 					$result['message'] = 'There was an error updating the question';
 					$result['type'] = 'error';
 				}
-				$this->load->view('questions/ajax', array('result' => $result));
+				$this->load->view('ajax', array('result' => $result));
 		}
 		else
 		{
