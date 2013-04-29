@@ -1,11 +1,12 @@
 		<div class="grid12">
 			<div class="hidden id"><?php echo $q->id;?></div>
+			<div class="hidden type">3</div>
 			<div>
 				<div class="settings float-r">
 					<img src="<?php echo base_url();?>/img/settings_small.png" alt="Settings Over" />
 					<ul>
 						<li><a href="#" class="setting">View</a></li>
-						<li><a href="<?php echo site_url();?>/questions/edit">Edit</a></li>
+						<!--<li><a href="<?php echo site_url();?>/questions/edit">Edit</a></li>-->
 						<li><a href="#" class="setting">Delete</a></li>
 						<li class="sep">Updated: <?php echo $q->updated;?></li>
 					</ul>
@@ -31,7 +32,7 @@
 						<?php foreach($answers as $answer): ;?>
 							<tr>
 								<td><?php echo $id; ?>)</td>
-								<td>
+								<td><div class="ansid hidden"><?php echo $answer->id;?></div>
 									<div class="editable" contentEditable="true">
 										<?php echo $answer->answer;?>
 										<button class="save answer">Save</button>
@@ -44,7 +45,7 @@
 										}
 									?>
 								</td>
-								<td><img src="<?php echo base_url();?>img/correct<?php echo $answer->correct;?>.png" /></td>
+								<td><img src="<?php echo base_url();?>img/correct<?php echo $answer->correct;?>.png" class="correct" /></td>
 							</tr>
 						<?php $id++; ;?>
 						<?php endforeach; ;?>

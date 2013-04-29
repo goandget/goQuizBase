@@ -109,10 +109,10 @@ class Questions extends CI_Controller {
 	 */
 	public function add_question()
 	{
-		if( ! ($id = $this->uri->segment(3)) || ! is_numeric($id))
+		/*if( ! ($id = $this->uri->segment(3)) || ! is_numeric($id))
 		{
 			redirect('quiz');
-		}
+		}*/
 
 		$error = '';
 		$types = array();
@@ -268,6 +268,9 @@ class Questions extends CI_Controller {
 					break;
 				case "answer":
 					$result = $this->question_model->update_answer($data['id'],$data['value']);
+					break;
+				case "correct":
+					$result = $this->question_model->update_correct_answer($data['id'],$data['value']);
 					break;
 				case "full":
 					$result = $this->question_model->update_question($data);

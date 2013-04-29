@@ -43,8 +43,18 @@ $(document).ready(function() {
 	$('.save').click(function(e)
 	{
 
+		if ($(this).parent('.editable').parent('td').html() == null)
+		{
+			var id = $(this).closest('.grid12').children('.id').html();
+		}
+		else
+		{
+			var id = $(this).closest('tr').find('.ansid').html();
+		}
+
+		
 		var result = $(this).parent('.editable').html().replace(/<button .*<\/button>/,'');
-		result += '#'+$(this).closest('.grid12').children('.id').html();
+		result += '#'+id;
 		
 		var type = $(this).attr('class').replace('save ','');
 		
@@ -102,12 +112,39 @@ $(document).ready(function() {
 
 	});
 
+	$('.correct').click(function(e)
+	{
+		
+		if ($(this).closest('.grid12').children('.type').html() == 3)
+		{
+			if ($(this).attr('src').match(/correct(\d+)/gi) == 'correct0')
+			{
+				update_answer('correct',$(this).closest('tr').find('.ansid').html(),1);
+				$(this).attr('src',$(this).attr('src').replace('correct0','correct1'));
+			}
+			else
+			{
+				update_answer('correct',$(this).closest('tr').find('.ansid').html(),0);
+				$(this).attr('src',$(this).attr('src').replace('correct1','correct0'));
+			}
+		}
+		else if ($(this).closest('.grid12').children('.type').html() == 2)
+		{
+			$(this).closest('table').find('tr').each(function() {
+					update_answer('correct',$(this).find('.ansid').html(),0);
+					$(this).find('.correct').attr('src',$(this).find('.correct').attr('src').replace('correct1','correct0'));
+			});
+			update_answer('correct',$(this).closest('tr').find('.ansid').html(),1);
+			$(this).attr('src',$(this).attr('src').replace('correct0','correct1'));
+		}
+
+	});
+
 	$(".save").hide();
 });
 
 function delete_question(id)
 {
-	alert(id);
 	$.ajax({
 		url: base_url + 'index.php/questions/delete',
 		type: 'POST',
@@ -115,6 +152,39 @@ function delete_question(id)
 		data: {
 			id: id,
 			type: 'question',
+			ajax: 1
+		},
+		success:function (data) {
+				
+                $('#alert').remove();
+
+                var $message = $(data).find('message');
+
+                var html = '<div id="alert" class="' + $message.find('type').text() + '">';                    
+
+                html += '<h3>' + $message.find('title').text() + '</h3>';
+
+                html += '<div class="message">' + $message.find('content').text()  + '</div>';                   
+
+                html += '</div>';
+
+                $('#container').prepend(html);
+                $('#alert').toggle();
+                $('#alert').slideDown('slow').delay(3000).slideUp('slow');
+		}
+	});
+}
+
+function update_answer(type,id,correct)
+{
+	var result = correct+'#'+id;
+	$.ajax({
+		url: base_url + 'index.php/questions/update',
+		type: 'POST',
+		dataType: "xml",        
+		data: {
+			type: type,
+			data: result,
 			ajax: 1
 		},
 		success:function (data) {

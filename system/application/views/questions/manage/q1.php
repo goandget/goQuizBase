@@ -5,7 +5,7 @@
 					<img src="<?php echo base_url();?>/img/settings_small.png" alt="Settings Over" />
 					<ul>
 						<li><a href="#" class="setting">View</a></li>
-						<li><a href="<?php echo site_url();?>/questions/edit">Edit</a></li>
+						<!--<li><a href="<?php echo site_url();?>/questions/edit">Edit</a></li>-->
 						<li><a href="#" class="setting">Delete</a></li>
 						<li class="sep">Updated: <?php echo $q->updated;?></li>
 					</ul>

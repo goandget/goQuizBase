@@ -11,7 +11,7 @@ class Question_model extends CI_Model {
 		{
 			$return = True;
 		}
-		
+
 		// Delete the Answers Connected to this question.
 		$this->db->where('question_id',$id);
 		if($this->db->delete('answers') && $return)
@@ -93,6 +93,70 @@ class Question_model extends CI_Model {
 			$this->db->where('id', $id);
 			
 			if($this->db->update('questions',$data))
+			{
+				return True;
+			}
+			else
+			{
+				return False;
+			}
+
+		}
+	}
+
+	// --------------------------------------------------------------------
+
+	/**
+	 * Update Answer
+	 *
+	 * @access	public
+	 * @param	int
+	 * @param 	string
+	 * @return	array
+	 */
+	//public function get_questions($id, $override_limit = FALSE)
+	public function update_answer($id,$value = False)
+	{
+
+		if ($value)
+		{
+			$data = array('answer'=>$value);
+
+			$this->db->where('id', $id);
+			
+			if($this->db->update('answers',$data))
+			{
+				return True;
+			}
+			else
+			{
+				return False;
+			}
+
+		}
+	}
+
+	// --------------------------------------------------------------------
+
+	/**
+	 * Update Answer
+	 *
+	 * @access	public
+	 * @param	int
+	 * @param 	string
+	 * @return	array
+	 */
+	//public function get_questions($id, $override_limit = FALSE)
+	public function update_correct_answer($id,$value = False)
+	{
+
+		if ($id)
+		{
+			$data = array('correct'=>$value);
+
+			$this->db->where('id', $id);
+			
+			if($this->db->update('answers',$data))
 			{
 				return True;
 			}

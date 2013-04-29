@@ -220,9 +220,34 @@ class Quiz extends CI_Controller {
 
 		$this->load->view('quiz/enter', $quizzes);
 	}
+	// --------------------------------------------------------------------
 
+	/**
+	 * Assign the Quiz
+	 * Give Pupils Access to the Quiz
+	 *
+	 * @access	public
+	 * @return	void
+	 */
+	public function assign()
+	{
 
-
+		$data = array();
+		$this->load->database();
+		$this->load->model('account_model');
+		$this->load->helper('form');
+		$data['quiz'] = $this->quiz_model->get_by_id(1);
+		$data['school']   = $this->account->get('school');
+		if (strtolower($data['school']) == 'admin')
+		{
+			$data['users'] = $this->account_model->get_users('');
+		}
+		else
+		{
+			$data['users'] = $this->account_model->get_users($school);
+		}
+		$this->load->view('quiz/assign', $data);
+	}
 	// --------------------------------------------------------------------
 
 	/**
