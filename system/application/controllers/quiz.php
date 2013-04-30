@@ -342,6 +342,22 @@ class Quiz extends CI_Controller {
 		{
 			redirect('user');
 		}
+
+		if (! $this->account->get_instance())
+		{
+			$data['user_id'] = $this->account->get('id');
+
+			$id = $this->quiz_model->set_instance($data);
+			$this->account->set_instance($id);
+		}
+
+		// Check that the user has been assigned the quiz and has not had too many attempts
+		$assign = $this->quiz_model->assigned_quiz($data['user_id']);
+		if (!is_array($assign) && ($assign['attempts'] < $this->quiz_model->get_attempts($assign['id']))
+		{
+			redirect('user');
+		}
+
 		if (! $this->account->get_instance())
 		{
 			$data['user_id'] = $this->account->get('id');

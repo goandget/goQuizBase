@@ -413,4 +413,38 @@ class Quiz_model extends CI_Model {
 			return FALSE;
 		}
 	}
+
+	//assigned_quiz($data['user_id']);
+	//	if (!is_array($assign) && ($assign['attempts'] < $this->quiz_model->get_attempts($assign['id']))
+
+	// --------------------------------------------------------------------
+
+	/**
+	 * Assign the Quizzes
+	 *
+	 * Assign the quiz to individuals or classes.
+	 *
+	 * @access	public
+	 * @access	int
+	 * @return	void
+	 */
+	public function assigned_quiz($uid)
+	{
+		
+	}
+	// --------------------------------------------------------------------
+
+	/**
+	 * Assign the Quizzes
+	 *
+	 * Assign the quiz to individuals or classes.
+	 *
+	 * @access	public
+	 * @access	int
+	 * @return	void
+	 */
+	public function get_attempts($id)
+	{
+
+	}
 }
