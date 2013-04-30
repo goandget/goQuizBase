@@ -428,9 +428,22 @@ class Quiz_model extends CI_Model {
 	 * @access	int
 	 * @return	void
 	 */
-	public function assigned_quiz($uid)
+	public function assigned_quiz($uid,$class)
 	{
+		$this->db->select('id,attempts');
+
+		$this->db->where_in($uid,$class);
 		
+		$query = $this->db->get('assign');
+		
+		if($query->num_rows() > 0)
+		{
+			return $query->row_array();
+		}
+		else
+		{
+			return FALSE;
+		}
 	}
 	// --------------------------------------------------------------------
 
@@ -445,6 +458,22 @@ class Quiz_model extends CI_Model {
 	 */
 	public function get_attempts($id)
 	{
+
+		$this->db->select('count(instance_id)');
+
+		$this->db->where('assign',$id);
+
+		$this->db->group_by('instance_id');
+		
+		if($query->num_rows() > 0)
+		{
+			$results = $query->row_array();
+			return $results[0];
+		}
+		else
+		{
+			return FALSE;
+		}
 
 	}
 }
