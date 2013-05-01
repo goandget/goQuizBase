@@ -230,7 +230,7 @@ class Quiz_model extends CI_Model {
 	public function get_results($instance = FALSE,$start = FALSE)
 	{
 		$this->db->select('start_time,question,image,type,correct,recorded,answer');
-		$this->db->join('questions','results.question_id=questions.id','right');
+		$this->db->join('questions','results.question_id=questions.id','left');
 		$this->db->join('instances','instances.instance_id=results.instance_id');
 		$this->db->where('instances.instance_id', $instance);
 		if ($start)	
@@ -432,7 +432,7 @@ class Quiz_model extends CI_Model {
 	{
 		$this->db->select('id,attempts');
 
-		$this->db->where_in($uid,$class);
+		$this->db->where_in('assign',array($uid,$class));
 		
 		$query = $this->db->get('assign');
 		
@@ -459,20 +459,23 @@ class Quiz_model extends CI_Model {
 	public function get_attempts($id)
 	{
 
-		$this->db->select('count(instance_id)');
+		$this->db->select('count(instance_id) as attempts');
 
 		$this->db->where('assign',$id);
 
 		$this->db->group_by('instance_id');
+
+		$query = $this->db->get('instances');
 		
 		if($query->num_rows() > 0)
 		{
 			$results = $query->row_array();
-			return $results[0];
+
+			return $results['attempts'];
 		}
 		else
 		{
-			return FALSE;
+			return 0;
 		}
 
 	}

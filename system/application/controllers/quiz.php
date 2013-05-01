@@ -343,24 +343,25 @@ class Quiz extends CI_Controller {
 			redirect('user');
 		}
 
+		$data['user_id'] = $this->account->get('id');
+
+		$class = $this->account->get('class');
+		
+		$assign = $this->quiz_model->assigned_quiz($data['user_id'],$class);
+
+		$data['assign'] = $assign['id'];
+
 		if (! $this->account->get_instance())
 		{
-			$data['user_id'] = $this->account->get('id');
 
-			$class = $this->account->get('class');
-			
-			$assign = $this->quiz_model->assigned_quiz($data['user_id'],$class);
-
-			$data['assign'] = $assign['id'];
+			// Check that the user has been assigned the quiz and has not had too many attempts
+			if (!is_array($assign) || ($assign['attempts'] <= $this->quiz_model->get_attempts($assign['id'])))
+			{
+				redirect('user');
+			}
 
 			$id = $this->quiz_model->set_instance($data);
 			$this->account->set_instance($id);
-		}
-
-		// Check that the user has been assigned the quiz and has not had too many attempts
-		if (!is_array($assign) && ($assign['attempts'] < $this->quiz_model->get_attempts($assign['id'])))
-		{
-			redirect('user');
 		}
 		
 		
@@ -425,9 +426,12 @@ class Quiz extends CI_Controller {
 
 		if ($data['finish']!='')	{
 			$question['results'] = $this->quiz_model->get_results($this->account->get_instance());
-			for ($i = 0; count($question['results']) > $i; $i++)
+			if ($question['results'])
 			{
-				$question['results'][$i]->answers = $this->get_answers($question['results'][$i]->type,$question['results'][$i]->answer);
+				for ($i = 0; count($question['results']) > $i; $i++)
+				{
+					$question['results'][$i]->answers = $this->get_answers($question['results'][$i]->type,$question['results'][$i]->answer);
+				}
 			}
 			$this->quiz_model->instance_finish($this->account->get_instance());
 			$this->account->set_instance(FALSE);
