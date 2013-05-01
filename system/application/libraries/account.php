@@ -53,6 +53,10 @@ class Account {
 
 		foreach($data as $key => $value)
 		{
+			if ($key == 'class' && $type == 1)
+			{
+				$value = '#class_teacher#';
+			}
 			$this->session->set_userdata($key, $value);
 		}
 	}

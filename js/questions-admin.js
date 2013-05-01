@@ -53,7 +53,9 @@ $(document).ready(function() {
 		}
 
 		
-		var result = $(this).parent('.editable').html().replace(/<button .*<\/button>/,'');
+		var result = $(this).parent('.editable').html().replace(/<button .*<\/button>/,'').replace(/\s+/g, " ");
+		$.trim(result);
+		alert(result);
 		result += '#'+id;
 		
 		var type = $(this).attr('class').replace('save ','');

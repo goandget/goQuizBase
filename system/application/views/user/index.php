@@ -8,6 +8,7 @@
 
 		<ul>
 			<?php if (($type == 1)||(strtolower($school) == 'admin')) {?><li><a href="<?php echo site_url('user/manage'); ?>">Manage Account</a></li><?php } ?>
+			<?php if (($type == 1)||(strtolower($school) == 'admin')) {?><li><a href="<?php echo site_url('quiz/assign'); ?>">Assign Test</a></li><?php } ?>
 			<!--<li><a href="<?=site_url('quiz')?>">Manage My Quizzes</a></li>-->
 			<?php if (strtolower($school) == 'admin') {?><li><a href="<?php echo site_url('questions/manage'); ?>">Manage the Questions</a></li><?php } ?>
 			<li><a href="<?php echo site_url('quiz/take'); ?>">Take a Quiz</a></li>

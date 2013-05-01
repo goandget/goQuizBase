@@ -230,9 +230,9 @@ class Quiz_model extends CI_Model {
 	public function get_results($instance = FALSE,$start = FALSE)
 	{
 		$this->db->select('start_time,question,image,type,correct,recorded,answer');
-		$this->db->join('questions','results.question_id=questions.id','left');
-		$this->db->join('instances','instances.instance_id=results.instance_id');
-		$this->db->where('instances.instance_id', $instance);
+		$this->db->join('instances','instances.instance_id=results.instance_id AND instances.instance_id='.$instance);
+		$this->db->join('questions','results.question_id=questions.id','right');
+		//$this->db->where('instances.instance_id', $instance);
 		if ($start)	
 		{
 			$this->db->limit(1,$start-10);
@@ -334,7 +334,17 @@ class Quiz_model extends CI_Model {
 	 */
 	public function record_answer($answer)
 	{
-		if ($this->db->insert('results',$answer))
+
+		$this->db->where('user_id',$answer['user_id']);
+		$this->db->where('question_id',$answer['question_id']);
+		$this->db->where('instance_id',$answer['instance_id']);
+		$query = $this->db->get('results');
+
+		if (!isset($answer['update'])&&($query->num_rows() > 0)) 
+		{
+			return TRUE;
+		}
+		else if ($this->db->insert('results',$answer))
 		{
 			return TRUE;
 		}
@@ -456,14 +466,15 @@ class Quiz_model extends CI_Model {
 	 * @access	int
 	 * @return	void
 	 */
-	public function get_attempts($id)
+	public function get_attempts($id,$uid)
 	{
 
 		$this->db->select('count(instance_id) as attempts');
 
-		$this->db->where('assign',$id);
+		$this->db->where('assign_id',$id);
+		$this->db->where('user_id',$uid);
 
-		$this->db->group_by('instance_id');
+		$this->db->group_by('user_id,assign_id');
 
 		$query = $this->db->get('instances');
 		

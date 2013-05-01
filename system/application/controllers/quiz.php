@@ -261,6 +261,7 @@ class Quiz extends CI_Controller {
 	 */
 	public function set_assign($id=False,$qid=False,$attempts=False,$ajax = False)
 	{
+		$uid   = $this->account->get('id');
 
 		if ($this->input->post('id'))
 		{
@@ -287,7 +288,7 @@ class Quiz extends CI_Controller {
 
 			$this->load->model('quiz_model');
 
-			$result = $this->quiz_model->assign(array('assign'=>$id,'qid'=>1,'attempts'=>$attempts));
+			$result = $this->quiz_model->assign(array('assign'=>$id,'qid'=>1,'attempts'=>$attempts,'assigned_by'=>$uid));
 
 		}
 
@@ -349,13 +350,12 @@ class Quiz extends CI_Controller {
 		
 		$assign = $this->quiz_model->assigned_quiz($data['user_id'],$class);
 
-		$data['assign'] = $assign['id'];
+		$data['assign_id'] = $assign['id'];
 
 		if (! $this->account->get_instance())
 		{
-
 			// Check that the user has been assigned the quiz and has not had too many attempts
-			if (!is_array($assign) || ($assign['attempts'] <= $this->quiz_model->get_attempts($assign['id'])))
+			if (!is_array($assign) || ($assign['attempts'] <= $this->quiz_model->get_attempts($assign['id'],$data['user_id'])))
 			{
 				redirect('user');
 			}

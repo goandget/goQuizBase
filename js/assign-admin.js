@@ -11,17 +11,26 @@ $(document).ready(function() {
 		
 		if ($(this).attr('alt') != undefined)
 		{
-			assign($(this).attr('alt'),$('.attempts').html());
+			assign($(this).attr('alt'),$('.attempts').html(),$( "#startDate" ).val(),$( "#endDate" ).val());
 		}
 		else 
 		{
-			assign($(this).html(),$('.attempts').html());
+			assign($(this).html(),$('.attempts').html(),$( "#startDate" ).val(),$( "#endDate" ).val());
 		}
 	});
 
+		// Set Assign Date Restrictions.
+
+	    $( "#startDate" ).datepicker({dateFormat: "yy-mm-dd" });
+	    $( "#startDate" ).change(function(){
+	    	$( "#endDate" ).datepicker( "option", "minDate", $( "#startDate" ).val());
+	    });
+
+	    $( "#endDate" ).datepicker({dateFormat: "yy-mm-dd"});
+
 });
 
-function assign(id,attempts) {
+function assign(id,attempts,start_date,end_date) {
 
 	$.ajax({
 		url: base_url + 'index.php/quiz/set_assign',
@@ -30,6 +39,8 @@ function assign(id,attempts) {
 		data: {
 			id: id,
 			attempts: attempts,
+			start: start_date,
+			end: end_date,
 			ajax: 1
 		},
 		success:function (data) {

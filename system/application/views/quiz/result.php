@@ -22,22 +22,31 @@
 							}
 						?>
 					</td>
-					<td>
-						<img src="<?php echo base_url();?>img/correct<?php echo $result->correct;?>.jpg" /></br>
-						Question Completed in 
-						<?php
-						// Calculate Total
-						if ($result->correct) {
-							$correct++;
+					<td><?php
+						if (!is_null($result->correct))
+						{?>
+							<img src="<?php echo base_url();?>img/correct<?php echo $result->correct;?>.png" /></br>
+							Question Completed in 
+							<?php
+							// Calculate Total
+							if ($result->correct) {
+								$correct++;
+							}
+							$total++;
+							// Caluculate Time Taken
+							if (!isset($lasttime)) {
+								$lasttime = strtotime($result->start_time);
+							}
+							echo secs_to_h(strtotime($result->recorded)-$lasttime);
+							$lasttime = strtotime($result->recorded);
+							
 						}
-						$total++;
-						// Caluculate Time Taken
-						if (!isset($lasttime)) {
-							$lasttime = strtotime($result->start_time);
-						}
-						echo secs_to_h(strtotime($result->recorded)-$lasttime);
-						$lasttime = strtotime($result->recorded);
-						?>
+						else
+						{
+							echo "- - -";
+							$total++;
+						}?>
+						
 					</td>
 				</tr>
 				<?php $i++; ?>
