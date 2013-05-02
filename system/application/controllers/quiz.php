@@ -278,6 +278,16 @@ class Quiz extends CI_Controller {
 			$attempts = $this->input->post('attempts');
 		}
 
+		if ($this->input->post('start'))
+		{
+			$start_date = $this->input->post('start');
+		}
+
+		if ($this->input->post('end'))
+		{
+			$end_date = $this->input->post('end');
+		}
+
 		if ($this->input->post('ajax'))
 		{
 			$ajax = $this->input->post('ajax');
@@ -288,7 +298,7 @@ class Quiz extends CI_Controller {
 
 			$this->load->model('quiz_model');
 
-			$result = $this->quiz_model->assign(array('assign'=>$id,'qid'=>1,'attempts'=>$attempts,'assigned_by'=>$uid));
+			$result = $this->quiz_model->assign(array('assign'=>$id,'qid'=>1,'attempts'=>$attempts,'assigned_by'=>$uid, 'start_date'=>$start_date, 'end_date'=>$end_date));
 
 		}
 

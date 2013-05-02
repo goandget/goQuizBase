@@ -53,7 +53,7 @@ class Account {
 
 		foreach($data as $key => $value)
 		{
-			if ($key == 'class' && $type == 1)
+			if ($key == 'class' && $data['type'] == 1)
 			{
 				$value = '#class_teacher#';
 			}

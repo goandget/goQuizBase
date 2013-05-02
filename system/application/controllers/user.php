@@ -325,7 +325,6 @@ class User extends CI_Controller {
 			}
 			else
 			{
-				echo $this->db->last_query();
 				$data['error'] = 'Invalid username/password.';
 			}
 		}

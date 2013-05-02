@@ -443,6 +443,8 @@ class Quiz_model extends CI_Model {
 		$this->db->select('id,attempts');
 
 		$this->db->where_in('assign',array($uid,$class));
+		$this->db->where('start_date <=',date('Y-m-d'));
+		$this->db->where('end_date >=',date('Y-m-d'));
 		
 		$query = $this->db->get('assign');
 		
