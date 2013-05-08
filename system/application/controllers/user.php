@@ -101,6 +101,10 @@ class User extends CI_Controller {
 
 	public function manage()
 	{
+		if( ! $this->account->logged_in())
+		{
+			redirect('user/login');
+		}
 
 		$data = array();
 		$this->load->database();

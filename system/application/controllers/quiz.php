@@ -521,15 +521,21 @@ class Quiz extends CI_Controller {
 		}
 		else if ($question['type'] == 3)
 		{
-			foreach ($answer as $a)
+			if (is_array($answer)) 
 			{
-				if (!$this->quiz_model->check_multiplechoice_answer($qid,$a))
+				foreach ($answer as $a)
 				{
-					return FALSE;
+					if (!$this->quiz_model->check_multiplechoice_answer($qid,$a))
+					{
+						return FALSE;
+					}
 				}
+				return TRUE;
 			}
-			return TRUE;
-			//return $this->quiz_model->check_multiplechoice_answer($qid,$answer);
+			else
+			{
+				return FALSE;
+			}
 		}
 
 	}

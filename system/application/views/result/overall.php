@@ -2,11 +2,11 @@
 	<h1>Results for: <? echo $school;?></h1>
 
 	<div id="body">
-		<p class="breadcrumbs"><a href="<?php echo site_url('user');?>">Home</a> &raquo; <a href="#">Results</a></p>
+		<p class="breadcrumbs"><a href="<?php echo site_url('user');?>">Home</a> &raquo; <a href="<?php echo site_url('result');?>">Results</a> &raquo; <a href="<?php echo site_url('result/overview');?>">Over View</a></p>
 
 		<p style="color:red;font-weight:bold;"><?php echo $error;?></p>
 		<div>
-			<!--<h2>Overall View</h2>
+			<h2>Overall View</h2>
 			<table>
 				<tr>
 					<th>Name</th>
@@ -33,30 +33,7 @@
 				</tr>
 				<?php endforeach; ?>
 			</table>
-			<hr>-->
-			<h2>Last Assigned Quiz: Assign Details</h2>
-			<table>
-				<tr>
-					<th>Name</th>
-					<?php
-					for ($i=1;$i < 10; $i++)
-					{
-						echo '<th>Q'.$i.'</th>';
-					}?>
-				</tr>
-				<?php foreach($users as $user): ?>
-				<tr>
-					<td><?php echo $user->forename.' '.$user->surname;?></td>
-					<?php
-					for ($i=1;$i < 10; $i++)
-					{
-						echo '<td>Q'.$i.'</td>';
-					}?>
-				</tr>
-				<?php endforeach; ?>
-			</table>
 			<hr>
-			<h2> Other Assigned Quizes: </h2>
 		</div>
 	</div>
 <?php $this->load->view('layout/footer'); ?>

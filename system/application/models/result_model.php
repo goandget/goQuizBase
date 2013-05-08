@@ -71,6 +71,42 @@ class Result_model extends CI_Model {
 	}
 
 	/**
+	 * Get Best Results
+	 *
+	 * Finds if the email is already taken. If the password is given,
+	 * this will also check if the account's password
+	 *
+	 * @access	public
+	 * @param	string
+	 * @param	string	(optional)
+	 * @return	boolean
+	 */
+	public function get_last_assigned($data = FALSE)
+	{
+		$this->db->select('assign.id as id');
+		$this->db->join('accounts','assign.assigned_by=accounts.id');
+		$this->db->where('start_date >',date("Y-m-d"));
+		if (strtolower($data['school']) != 'admin')
+		{
+			$this->db->where('school',$data['school']);
+		}
+		$this->db->order_by('end_date DESC');
+		$this->db->limit(1);
+
+		$query = $this->db->get('instances');
+		
+		if($query->num_rows() > 0)
+		{
+			return $query->row()->id;
+		}
+
+		else
+		{
+			return FALSE;
+		}
+	}
+
+	/**
 	 * Exists
 	 *
 	 * Finds if the email is already taken. If the password is given,
