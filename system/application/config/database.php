@@ -44,7 +44,7 @@
 | the active record class
 */
 
-$active_group = 'default';
+$active_group = 'laptop';
 $active_record = TRUE;
 
 $db['default']['hostname'] = 'localhost';
@@ -62,6 +62,22 @@ $db['default']['dbcollat'] = 'utf8_general_ci';
 $db['default']['swap_pre'] = '';
 $db['default']['autoinit'] = TRUE;
 $db['default']['stricton'] = FALSE;
+
+$db['laptop']['hostname'] = 'localhost';
+$db['laptop']['username'] = 'root';
+$db['laptop']['password'] = 'computer';
+$db['laptop']['database'] = 'goQuizBase';
+$db['laptop']['dbdriver'] = 'mysql';
+$db['laptop']['dbprefix'] = '';
+$db['laptop']['pconnect'] = TRUE;
+$db['laptop']['db_debug'] = TRUE;
+$db['laptop']['cache_on'] = FALSE;
+$db['laptop']['cachedir'] = '';
+$db['laptop']['char_set'] = 'utf8';
+$db['laptop']['dbcollat'] = 'utf8_general_ci';
+$db['laptop']['swap_pre'] = '';
+$db['laptop']['autoinit'] = TRUE;
+$db['laptop']['stricton'] = FALSE;
 
 
 /* End of file database.php */
