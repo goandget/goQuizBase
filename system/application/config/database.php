@@ -44,7 +44,7 @@
 | the active record class
 */
 
-$active_group = 'laptop';
+$active_group = 'default';
 $active_record = TRUE;
 
 $db['default']['hostname'] = 'localhost';

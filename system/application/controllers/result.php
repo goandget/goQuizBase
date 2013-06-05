@@ -37,12 +37,16 @@ class Result extends CI_Controller {
 		$data['assign_id']	= $this->result_model->get_last_assigned($qry_data);
 		$qry_data['assign_id'] = $data['assign_id'];
 		$data['users'] 			= $this->result_model->get_assigned_users($qry_data);
-		$data_sort['bests'] 	= $this->result_model->get_best_results($qry_data);
+
+		$data_sort = $this->result_model->get_number_attempts($qry_data);
+
+		/*$data_sort['bests'] 	= $this->result_model->get_best_results($qry_data);
 		$data_sort['lasts'] 	= $this->result_model->get_last_results($qry_data);
-		$data_sort['averages'] 	= $this->result_model->get_avarages_results($qry_data);
+		$data_sort['averages'] 	= $this->result_model->get_avarages_results($qry_data);*/
 		
 
 		// Sort the data to enable easy formatting in view 
+		/*
 		foreach ($data_sort as $k => $v)
 		{
 			if (is_array($v)) {
@@ -55,7 +59,16 @@ class Result extends CI_Controller {
 			{
 				$data[$k] = TRUE;
 			}
+		}*/
+		if (is_array($data['users']))
+		{
+			foreach ($data['users'] as $tmp_user)
+			{
+				$tmp_data[$tmp_user->user_id][] = $tmp_user;
+			}
 		}
+		$data['users'] = $tmp_data;
+
 		// Display the Results
 		$this->load->view('result/index',$data);
 	}

@@ -39,19 +39,24 @@
 				<tr>
 					<th>Name</th>
 					<?php
-					for ($i=1;$i < 10; $i++)
+					for ($i=1;$i <= count($user); $i++)
 					{
 						echo '<th>Q'.$i.'</th>';
 					}?>
+					<th>Total</th>
+					<th>Attempts</th>
 				</tr>
 				<?php foreach($users as $user): ?>
 				<tr>
-					<td><?php echo $user->forename.' '.$user->surname;?></td>
+					<td><?php echo $user[0]->forename.' '.$user[0]->surname;?></td>
 					<?php
-					for ($i=1;$i < 10; $i++)
+					for ($i=0;$i < count($user); $i++)
 					{
-						echo '<td>Q'.$i.'</td>';
-					}?>
+						echo '<td><img src="'.base_url().'img/correct'.$user[$i]->correct.'.png" /></td>';
+					}
+					echo '<td></td>';
+					echo '<td></td>';
+					?>
 				</tr>
 				<?php endforeach; ?>
 			</table>

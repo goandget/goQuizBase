@@ -153,9 +153,9 @@ class Result_model extends CI_Model {
 	 * @param	string	(optional)
 	 * @return	boolean
 	 */
-	public function get_last_results($data = FALSE)
+	public function get_avarages_results($data = FALSE)
 	{
-		$this->db->select('instances.instance_id,instances.user_id as user_id,SUM(correct) as correct,start_time');
+		$this->db->select('instances.instance_id,');
 		$this->db->join('results','instances.instance_id=results.instance_id');
 		$this->db->where('finished',1);
 		$this->db->group_by('instances.user_id,instances.instance_id');
@@ -188,10 +188,16 @@ class Result_model extends CI_Model {
 	 */
 	public function get_assigned_users($data = FALSE)
 	{
-		$this->db->select('instances.user_id as user_id,SUM(correct) as correct,count(distinct instances.instance_id) as taken');
+		//$this->db->select('instances.user_id as user_id,forename,surname,SUM(correct) as correct,count(distinct instances.instance_id) as taken');
+		
+		$this->db->select('instances.user_id as user_id,forename,surname,question_id,correct');
 		$this->db->join('results','instances.instance_id=results.instance_id');
+		$this->db->join('accounts','instances.user_id=accounts.id');
+		$this->db->join('assign','instances.assign_id=assign.id');
+		$this->db->join('questions','questions.quiz_id=assign.qid','RIGHT');
 		$this->db->where('finished',1);
-		$this->db->group_by('instances.user_id');
+		$this->db->where('assign_id',$data['assign_id']);
+		$this->db->group_by('instances.user_id,forename,surname,question_id,correct');
 		$query = $this->db->get('instances');
 
 		if($query->num_rows() > 0)
