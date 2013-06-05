@@ -35,6 +35,9 @@
 			</table>
 			<hr>-->
 			<h2>Last Assigned Quiz: Assign Details</h2>
+			<?php
+			if (isset($user))
+			{ ?>
 			<table>
 				<tr>
 					<th>Name</th>
@@ -54,12 +57,20 @@
 					{
 						echo '<td><img src="'.base_url().'img/correct'.$user[$i]->correct.'.png" /></td>';
 					}
-					echo '<td></td>';
-					echo '<td></td>';
+					echo '<td>'.$user[0]->total.'</td>';
+					echo '<td>'.$user[0]->attempts.'</td>';
 					?>
 				</tr>
 				<?php endforeach; ?>
 			</table>
+			<?php
+			}
+			else 
+			{
+				?>
+				<p>There are no results stored</p>
+				<?php
+			}?>
 			<hr>
 			<h2> Other Assigned Quizes: </h2>
 		</div>

@@ -210,4 +210,39 @@ class Result_model extends CI_Model {
 			return FALSE;
 		}
 	}
+
+
+	/**
+	 *
+	 *
+	 */
+	public function get_number_attempts($data = FALSE)
+	{
+		if (!$data)
+		{
+			return FALSE;
+		}
+
+		$this->db->select('instances.user_id as user_id,SUM(correct) as total,COUNT(DISTINCT instances.instance_id) as attempts');
+		$this->db->join('results','results.instance_id=instances.instance_id');
+		$this->db->where('finished',1);
+		$this->db->where('assign_id',$data['assign_id']);
+		$this->db->group_by('instances.user_id');
+		$query = $this->db->get('instances');
+
+		if ($query->num_rows() >  0)
+		{
+			foreach ($query->result() as $row)
+			{
+				$tmp[$row->user_id]['attempts'] = $row->attempts;
+				$tmp[$row->user_id]['total'] = $row->total;
+			}
+
+			return $tmp;
+		}
+		else
+		{
+			return FALSE;
+		}
+	}
 }

@@ -64,10 +64,13 @@ class Result extends CI_Controller {
 		{
 			foreach ($data['users'] as $tmp_user)
 			{
+				$tmp_user->attempts = $data_sort[$tmp_user->user_id]['attempts'];
+				$tmp_user->total = $data_sort[$tmp_user->user_id]['total'];
 				$tmp_data[$tmp_user->user_id][] = $tmp_user;
 			}
+
+			$data['users'] = $tmp_data;
 		}
-		$data['users'] = $tmp_data;
 
 		// Display the Results
 		$this->load->view('result/index',$data);
