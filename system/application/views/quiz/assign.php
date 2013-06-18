@@ -7,7 +7,7 @@
 	<div id="body">
 		<p class="breadcrumbs"><a href="<?php echo site_url('user');?>">Home</a> &raquo; <a href="<?=site_url('quiz')?>">Quizzes</a> &raquo; <a href="#">Assign</a></p>
 		<p>Assign Quiz: <?php echo $quiz[0]->name;?></p>
-		<p>Number of Attempts: <span class='editable attempts' contentEditable="true">2</span></p>
+		<p>Number of Attempts: <span class='editable attempts' contentEditable="true">1</span></p>
 		<p>Start Date: <input type="text" id="startDate"  readonly/></p>
 		<p>End Date: <input type="text" id="endDate" readonly /></p>
 		<p class="clr-b instruction">Click on either the User or the Class to assign this Quiz.</p>

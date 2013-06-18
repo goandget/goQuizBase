@@ -12,7 +12,7 @@
 				<?php 
 					if ($questions['image'])	{
 				?>
-						<img src="<?php echo base_url();?>img/quiz/1/<?php echo $questions['image'];?>" />
+						<img src="<?php echo base_url();?>img/quiz/1/<?php echo $questions['id'];?>/<?php echo $questions['image'];?>" />
 				<?php
 					}
 				?>
@@ -35,7 +35,7 @@
 										<?php 
 											if ($answer->image)	{
 										?>
-												<img src="<?php echo base_url();?>img/quiz/1/<?php echo $answer->image;?>" />
+												<img src="<?php echo base_url();?>img/quiz/1/<?php echo $questions['id'];?>/<?php echo $answer->image;?>" />
 										<?php
 											}
 										?>

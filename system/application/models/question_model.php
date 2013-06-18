@@ -29,7 +29,7 @@ class Question_model extends CI_Model {
 	// Return the questions for managing.
 	public function get_questions()
 	{
-		$this->db->select('id,questions.type,question,level,updated');
+		$this->db->select('id,questions.type,question,image,level,updated');
 		$this->db->join('question-types', 'typeid = questions.type', 'LEFT');
 		$query = $this->db->get('questions');
 

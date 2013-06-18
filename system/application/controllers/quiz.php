@@ -245,7 +245,7 @@ class Quiz extends CI_Controller {
 		}
 		else
 		{
-			$data['users'] = $this->account_model->get_users($school);
+			$data['users'] = $this->account_model->get_users($data['school']);
 		}
 		$this->load->view('quiz/assign', $data);
 	}
@@ -262,6 +262,7 @@ class Quiz extends CI_Controller {
 	public function set_assign($id=False,$qid=False,$attempts=False,$ajax = False)
 	{
 		$uid   = $this->account->get('id');
+		$school   = $this->account->get('school');
 
 		if ($this->input->post('id'))
 		{
@@ -288,6 +289,11 @@ class Quiz extends CI_Controller {
 			$end_date = $this->input->post('end');
 		}
 
+		if ($this->input->post('type'))
+		{
+			$type = $this->input->post('type');
+		}
+
 		if ($this->input->post('ajax'))
 		{
 			$ajax = $this->input->post('ajax');
@@ -298,7 +304,7 @@ class Quiz extends CI_Controller {
 
 			$this->load->model('quiz_model');
 
-			$result = $this->quiz_model->assign(array('assign'=>$id,'qid'=>1,'attempts'=>$attempts,'assigned_by'=>$uid, 'start_date'=>$start_date, 'end_date'=>$end_date));
+			$result = $this->quiz_model->assign(array('assign'=>$id,'qid'=>1,'attempts'=>$attempts,'assigned_by'=>$uid, 'start_date'=>$start_date, 'end_date'=>$end_date,'assign_type'=>$type,'school'=>$school));
 
 		}
 
@@ -357,8 +363,10 @@ class Quiz extends CI_Controller {
 		$data['user_id'] = $this->account->get('id');
 
 		$class = $this->account->get('class');
+
+		$school   = $this->account->get('school');
 		
-		$assign = $this->quiz_model->assigned_quiz($data['user_id'],$class);
+		$assign = $this->quiz_model->assigned_quiz($data['user_id'],$class,$school);
 
 		$data['assign_id'] = $assign['id'];
 

@@ -13,6 +13,10 @@
 					<td><?=form_input('school', set_value('school'))?></td>
 				</tr>
 				<tr>
+					<td>Title: </td>
+					<td><?=form_dropdown('title', array('' => 'N/A','Mr' => 'Mr','Mrs' => 'Mrs','Miss' => 'Miss','Ms' => 'Ms'))?></td>
+				</tr>
+				<tr>
 					<td>Forename: </td>
 					<td><?php echo form_input('forename', set_value('forename'));?></td>
 				</tr>
@@ -23,6 +27,10 @@
 				<tr>
 					<td>Email: </td>
 					<td><?=form_input('email', set_value('email'))?></td>
+				</tr>
+				<tr>
+					<td>Type: </td>
+					<td><?=form_dropdown('type', array(1 => 'Teacher',2 => 'Pupil'))?></td>
 				</tr>
 				<tr>
 					<td>Username: </td>

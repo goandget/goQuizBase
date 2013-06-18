@@ -16,14 +16,14 @@
 					<button class="save level">Save</button>
 				</div>
 				<div class="question float-l">
+					<div class="editable" contentEditable="true"><?php echo $q->question;?><button class="save question">Save</button></div>
 					<?php 
 						if (isset($q->image))	{
 					?>
-							<img src="<?php echo base_url();?>img/quiz/1/<?php echo $q->image;?>" class="float-l" />
+							<img src="<?php echo base_url();?>img/quiz/1/<?php echo $q->id;?>/<?php echo $q->image;?>" class="float-l" />
 					<?php
 						}
 					?>
-					<div class="editable" contentEditable="true"><?php echo $q->question;?><button class="save question">Save</button></div>
 				</div>
 			</div>
 			<div class="answers clr-b">
@@ -40,7 +40,7 @@
 									<?php 
 										if (isset($answer->image))	{
 									?>
-											<img src="<?php echo base_url();?>img/quiz/1/<?php echo $answer->image;?>" />
+											<img src="<?php echo base_url();?>img/quiz/1/<?php echo $q->id;?>/<?php echo $answer->image;?>" />
 									<?php
 										}
 									?>

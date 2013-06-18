@@ -51,9 +51,9 @@ $(document).ready(function() {
 		{
 			var id = $(this).closest('tr').find('.ansid').html();
 		}
-
+ 
 		
-		var result = $(this).parent('.editable').html().replace(/<button .*<\/button>/,'').replace(/\s+/g, " ");
+		var result = $(this).parent('.editable').html().replace(/<button .*<\/button>/,'').replace(/\s+/g, " ").replace(/&nbsp;/g, "");
 		$.trim(result);
 		alert(result);
 		result += '#'+id;

@@ -11,11 +11,11 @@ $(document).ready(function() {
 		
 		if ($(this).attr('alt') != undefined)
 		{
-			assign($(this).attr('alt'),$('.attempts').html(),$( "#startDate" ).val(),$( "#endDate" ).val());
+			assign($(this).attr('alt'),$('.attempts').html(),$( "#startDate" ).val(),$( "#endDate" ).val(),'user');
 		}
 		else 
 		{
-			assign($(this).html(),$('.attempts').html(),$( "#startDate" ).val(),$( "#endDate" ).val());
+			assign($(this).html(),$('.attempts').html(),$( "#startDate" ).val(),$( "#endDate" ).val(),'class');
 		}
 	});
 
@@ -39,7 +39,7 @@ $(document).ready(function() {
 
 });
 
-function assign(id,attempts,start_date,end_date) {
+function assign(id,attempts,start_date,end_date,type) {
 
 	$.ajax({
 		url: base_url + 'index.php/quiz/set_assign',
@@ -50,6 +50,7 @@ function assign(id,attempts,start_date,end_date) {
 			attempts: attempts,
 			start: start_date,
 			end: end_date,
+			type: type,
 			ajax: 1
 		},
 		success:function (data) {

@@ -18,7 +18,7 @@
 					<?php 
 						if (isset($q->image))	{
 					?>
-							<img src="<?php echo base_url();?>img/quiz/1/<?php echo $q->image;?>" class="float-l" />
+							<img src="<?php echo base_url();?>img/quiz/1/<?php echo $q->id;?>"/<?php echo $q->image;?>" class="float-l" />
 					<?php
 						}
 					?>

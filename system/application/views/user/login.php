@@ -30,5 +30,6 @@
 
 		<?php echo form_close()?>
 
-		<p>Don't have an account? <a href="<?php echo site_url('user/register'); ?>">Register</a></div>
+		<!--<p>Don't have an account? <a href="<?php echo site_url('user/register'); ?>">Register</a></p>-->
+	</div>
 <?php $this->load->view('layout/footer'); ?>

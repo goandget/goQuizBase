@@ -438,13 +438,14 @@ class Quiz_model extends CI_Model {
 	 * @access	int
 	 * @return	void
 	 */
-	public function assigned_quiz($uid,$class)
+	public function assigned_quiz($uid,$class,$school)
 	{
 		$this->db->select('id,attempts');
 
 		$this->db->where_in('assign',array($uid,$class));
 		$this->db->where('start_date <=',date('Y-m-d'));
 		$this->db->where('end_date >=',date('Y-m-d'));
+		$this->db->where('school',$school);
 		
 		$query = $this->db->get('assign');
 		

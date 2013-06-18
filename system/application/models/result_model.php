@@ -90,7 +90,7 @@ class Result_model extends CI_Model {
 
 		if (strtolower($data['school']) != 'admin')
 		{
-			$this->db->where('school',$data['school']);
+			$this->db->where('accounts.school',$data['school']);
 		}
 
 		$this->db->order_by('end_date DESC');

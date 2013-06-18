@@ -59,6 +59,8 @@ class User extends CI_Controller {
 			$data['surname'] = $this->input->post('surname');
 			$data['username'] = $this->input->post('username');
 			$data['password'] = $this->input->post('password');
+			$data['type'] = $this->input->post('type');
+			$data['title'] = $this->input->post('title');
 			$schooladmin = $this->input->post('schooladmin');
 
 			if($this->account_model->exists(array('email' => $data['email'])))
@@ -137,18 +139,19 @@ class User extends CI_Controller {
             //  Load the database and the model for saving users data
 		    $this->load->database();
 		    $this->load->model('account_model');
-
+		    
 		    foreach ($users as $user)
 		    {
 		    	$data = array();
 			    $data['email']    = $user['email'];
-			    if (True == False)
+			    $school   = $this->account->get('school');
+				if (strtolower($school) == 'admin')
 			    {
-
+			    	$data['school'] =$user['school'];
 			    }
 			    else 
 			    {
-			    	$data['school'] = $this->input->post('school');
+			    	$data['school'] = $school;
 			    }
 			    $data['forename'] =$user['forename'];
 			    $data['surname'] = $user['surname'];

@@ -44,12 +44,12 @@
 | the active record class
 */
 
-$active_group = 'laptop';
+$active_group = 'default';
 $active_record = TRUE;
 
 $db['default']['hostname'] = 'localhost';
-$db['default']['username'] = 'root';
-$db['default']['password'] = '';
+$db['default']['username'] = 'goquizbase';
+$db['default']['password'] = 'puqdrCKKMcpPv6Be';
 $db['default']['database'] = 'goQuizBase';
 $db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = '';
