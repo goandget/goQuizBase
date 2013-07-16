@@ -16124,3 +16124,54 @@ DEBUG - 2013-06-18 14:16:22 --> File loaded: system/application/views/layout/foo
 DEBUG - 2013-06-18 14:16:22 --> File loaded: system/application/views/user/manage.php
 DEBUG - 2013-06-18 14:16:22 --> Final output sent to browser
 DEBUG - 2013-06-18 14:16:22 --> Total execution time: 0.0095
+DEBUG - 2013-06-18 20:59:24 --> Config Class Initialized
+DEBUG - 2013-06-18 20:59:24 --> Hooks Class Initialized
+DEBUG - 2013-06-18 20:59:24 --> Utf8 Class Initialized
+DEBUG - 2013-06-18 20:59:24 --> UTF-8 Support Enabled
+DEBUG - 2013-06-18 20:59:24 --> URI Class Initialized
+DEBUG - 2013-06-18 20:59:24 --> Router Class Initialized
+DEBUG - 2013-06-18 20:59:24 --> No URI present. Default controller set.
+DEBUG - 2013-06-18 20:59:24 --> Output Class Initialized
+DEBUG - 2013-06-18 20:59:24 --> Security Class Initialized
+DEBUG - 2013-06-18 20:59:24 --> Input Class Initialized
+DEBUG - 2013-06-18 20:59:24 --> Global POST and COOKIE data sanitized
+DEBUG - 2013-06-18 20:59:24 --> Language Class Initialized
+DEBUG - 2013-06-18 20:59:24 --> Loader Class Initialized
+DEBUG - 2013-06-18 20:59:24 --> Helper loaded: url_helper
+DEBUG - 2013-06-18 20:59:24 --> Session Class Initialized
+DEBUG - 2013-06-18 20:59:24 --> Helper loaded: string_helper
+DEBUG - 2013-06-18 20:59:24 --> A session cookie was not found.
+DEBUG - 2013-06-18 20:59:24 --> Session routines successfully run
+DEBUG - 2013-06-18 20:59:24 --> Controller Class Initialized
+DEBUG - 2013-06-18 20:59:24 --> File loaded: system/application/views/layout/header.php
+DEBUG - 2013-06-18 20:59:24 --> File loaded: system/application/views/layout/footer.php
+DEBUG - 2013-06-18 20:59:24 --> File loaded: system/application/views/index.php
+DEBUG - 2013-06-18 20:59:24 --> Final output sent to browser
+DEBUG - 2013-06-18 20:59:24 --> Total execution time: 0.0155
+DEBUG - 2013-06-18 20:59:33 --> Config Class Initialized
+DEBUG - 2013-06-18 20:59:33 --> Hooks Class Initialized
+DEBUG - 2013-06-18 20:59:33 --> Utf8 Class Initialized
+DEBUG - 2013-06-18 20:59:33 --> UTF-8 Support Enabled
+DEBUG - 2013-06-18 20:59:33 --> URI Class Initialized
+DEBUG - 2013-06-18 20:59:33 --> Router Class Initialized
+DEBUG - 2013-06-18 20:59:33 --> Output Class Initialized
+DEBUG - 2013-06-18 20:59:33 --> Security Class Initialized
+DEBUG - 2013-06-18 20:59:33 --> Input Class Initialized
+DEBUG - 2013-06-18 20:59:33 --> Global POST and COOKIE data sanitized
+DEBUG - 2013-06-18 20:59:33 --> Language Class Initialized
+DEBUG - 2013-06-18 20:59:33 --> Loader Class Initialized
+DEBUG - 2013-06-18 20:59:33 --> Helper loaded: url_helper
+DEBUG - 2013-06-18 20:59:33 --> Session Class Initialized
+DEBUG - 2013-06-18 20:59:33 --> Helper loaded: string_helper
+DEBUG - 2013-06-18 20:59:33 --> Session routines successfully run
+DEBUG - 2013-06-18 20:59:33 --> Controller Class Initialized
+DEBUG - 2013-06-18 20:59:33 --> Helper loaded: form_helper
+DEBUG - 2013-06-18 20:59:33 --> Form Validation Class Initialized
+DEBUG - 2013-06-18 20:59:33 --> Database Driver Class Initialized
+DEBUG - 2013-06-18 20:59:33 --> Model Class Initialized
+DEBUG - 2013-06-18 20:59:33 --> Model Class Initialized
+DEBUG - 2013-06-18 20:59:33 --> File loaded: system/application/views/layout/header.php
+DEBUG - 2013-06-18 20:59:33 --> File loaded: system/application/views/layout/footer.php
+DEBUG - 2013-06-18 20:59:33 --> File loaded: system/application/views/user/login.php
+DEBUG - 2013-06-18 20:59:33 --> Final output sent to browser
+DEBUG - 2013-06-18 20:59:33 --> Total execution time: 0.0174

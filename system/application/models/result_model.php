@@ -213,14 +213,8 @@ class Result_model extends CI_Model {
 
 
 	/**
-	 * Get number Attempts
 	 *
-	 * Return the number of attempts that the user
-	 * has had
 	 *
-	 * @access	public
-	 * @param	array
-	 * @return	array if true / boolean if false
 	 */
 	public function get_number_attempts($data = FALSE)
 	{
@@ -235,40 +229,6 @@ class Result_model extends CI_Model {
 		$this->db->where('assign_id',$data['assign_id']);
 		$this->db->group_by('instances.user_id');
 		$query = $this->db->get('instances');
-
-		if ($query->num_rows() >  0)
-		{
-			foreach ($query->result() as $row)
-			{
-				$tmp[$row->user_id]['attempts'] = $row->attempts;
-				$tmp[$row->user_id]['total'] = $row->total;
-			}
-
-			return $tmp;
-		}
-		else
-		{
-			return FALSE;
-		}
-	}
-
-
-	/**
-	 * Get number Attempts
-	 *
-	 * Return the number of attempts that the user
-	 * has had
-	 *
-	 * @access	public
-	 * @param	array
-	 * @return	array if true / boolean if false
-	 */
-	public function get_number_attempts($data = FALSE)
-	{
-
-		SELECT  FROM `assign` LEFT JOIN `accounts` ON `assign` =`accounts`.`id` AND `assign_type`='user' WHERE `assign`.`school` = 'Admin'
-		$this->db->select('');
-		$this->db->join;
 
 		if ($query->num_rows() >  0)
 		{

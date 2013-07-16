@@ -40,8 +40,6 @@ class Result extends CI_Controller {
 
 		$data_sort = $this->result_model->get_number_attempts($qry_data);
 
-		$data['assigned'] = $this->result_model->get_assigned_tests($qry_data);
-
 		/*$data_sort['bests'] 	= $this->result_model->get_best_results($qry_data);
 		$data_sort['lasts'] 	= $this->result_model->get_last_results($qry_data);
 		$data_sort['averages'] 	= $this->result_model->get_avarages_results($qry_data);*/
