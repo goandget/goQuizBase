@@ -48,8 +48,8 @@ $active_group = 'default';
 $active_record = TRUE;
 
 $db['default']['hostname'] = 'localhost';
-$db['default']['username'] = 'goquizbase';
-$db['default']['password'] = 'puqdrCKKMcpPv6Be';
+$db['default']['username'] = 'root';
+$db['default']['password'] = 'akinyemi';
 $db['default']['database'] = 'goQuizBase';
 $db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = '';

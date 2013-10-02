@@ -247,6 +247,14 @@ table.styled td {
   border-left-color: #9facd1;
   border-left-color: rgba(255, 255, 255, 0.4);
 }
+.example
+{
+  margin: 20px;
+  padding: 20px;
+  border: 1px solid #9facd1;
+  font-style: italic;
+  color: #BEBEBE;
+}
 .grid12 
 {
 	background: #FF6600;

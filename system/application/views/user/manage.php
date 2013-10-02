@@ -2,23 +2,17 @@
 	<h1>Register</h1>
 
 	<div id="body">
-		<p class="breadcrumbs"><a href="<? echo site_url('user');?>">Home</a> &raquo; <a href="#">Manage</a></p>
+		<p class="breadcrumbs"><a href="<?php echo site_url('user');?>">Home</a> &raquo; <a href="#">Manage</a></p>
 
 		<p style="color:red;font-weight:bold;"><?php echo $error;?></p>
+
+		<div class="menu">
+			<span class="button">Register User</span>
+			<span class="button"><a href="<?php echo site_url('user/bulk_upload');?>">Bulk Import</a></span>
+		</div>
+
 		<div>
 			<?php echo form_open_multipart('user/manage');?>
-			<table>
-				<tr><th colspan="3">Import Bulk Users</th></tr>
-				<tr>
-					<td colspan="3"><p class="instruction">At the moment we only accept a csv file.<br />Please ensure that the headings of each field are in the first line of the csv. </p></td>
-				</tr>
-				<tr>
-					<td>Upload File:</td>
-					<td><?php echo form_upload('file'); ?></td>
-					<td><?php echo form_submit('import', 'import'); ?></td>
-				</tr>
-			</table>
-			<p>&nbsp;</p>
 				<table>
 					<tr>
 						<th colspan="2">Register Single User</th>
@@ -38,6 +32,10 @@
 					?>
 					</tr>
 					<tr>
+						<td>Title: </td>
+						<td><?php echo form_input('title', set_value('title'));?></td>
+					</tr>
+					<tr>
 						<td>Forename: </td>
 						<td><?php echo form_input('forename', set_value('forename'));?></td>
 					</tr>
@@ -48,6 +46,18 @@
 					<tr>
 						<td>Email: </td>
 						<td><?php echo form_input('email', set_value('email'));?></td>
+					</tr>
+					<tr>
+						<td>Class: </td>
+						<td><?php echo form_input('class', set_value('class'));?></td>
+					</tr>
+					<tr>
+						<td>Year: </td>
+						<td><?php echo form_input('year', set_value('year'));?></td>
+					</tr>
+					<tr>
+						<td>User Type: </td>
+						<td><?php echo form_dropdown('type', array( 1 => 'Teacher',2 => 'Pupil'));?></td>
 					</tr>
 					<tr>
 						<td>Username: </td>
@@ -81,8 +91,8 @@
 					<td><?php echo $user->username;?></td>
 					<td><?php echo $user->class; ?></td>
 					<td>
-						<a href="#<? echo site_url('user/edit/'.$user->id); ?>" onclick="alert('This feature isn\'t available yet!')">edit</a>
-						<a href="<? echo site_url('user/delete/'.$user->id); ?>">del</a>
+						<a href="#<?php echo site_url('user/edit/'.$user->id); ?>" onclick="alert('This feature isn\'t available yet!')">edit</a>
+						<a href="<?php echo site_url('user/delete/'.$user->id); ?>">del</a>
 					</td>
 				</tr>
 				<?php endforeach; ?>

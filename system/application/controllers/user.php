@@ -126,7 +126,6 @@ class User extends CI_Controller {
         }
         else if (!$this->input->post('email'))
         {
-            // /print_r($this->upload->data());
             // Store the details of the file uploaded.
             $upload = $this->upload->data();
             
@@ -176,7 +175,6 @@ class User extends CI_Controller {
 			$this->form->set_rules('school', 'school', 'trim|required');
 			$this->form->set_rules('username', 'username', 'trim|required');
 			$this->form->set_rules('password', 'Password', 'trim|required|matches[confirm]');
-
         }
 		
 
@@ -260,6 +258,161 @@ class User extends CI_Controller {
 		}
 
 		$this->load->view('user/manage', $data);
+
+	}
+	// --------------------------------------------------------------------
+
+	/**
+	 * Manage
+	 *
+	 * @access	public
+	 * @return	void
+	 */
+
+	public function bulk_upload()
+	{
+		if( ! $this->account->logged_in())
+		{
+			redirect('user/login');
+		}
+
+		$data = array();
+		$this->load->database();
+		$this->load->model('account_model');
+
+		$this->load->library('form_validation', NULL, 'form');
+
+        $config['upload_path'] = './uploads/'; // happens to be my test upload path
+        $config['allowed_types'] = 'csv';    
+        $config['max_size']    = '500'; 
+
+		$this->load->library('upload', $config);
+
+        if ( (! $this->upload->do_upload('file')) && (!$this->input->post('email')))
+        {
+            $data['error'] = $this->upload->display_errors();
+        }
+        else if (empty($_FILES['file']['name']))
+        {
+        	$data['error'] = 'The filetype you are attempting to upload is not allowed.';
+        }
+        else
+        {
+            // Store the details of the file uploaded.
+            $upload = $this->upload->data();
+            
+            // Load CSV Reader library
+            $this->load->library('CSVReader');
+            
+            // Parse the csv file into the variable users
+            $users = $this->csvreader->parse_file($upload['full_path'],True);
+            
+            //  Load the database and the model for saving users data
+		    $this->load->database();
+		    $this->load->model('account_model');
+		    
+		    foreach ($users as $user)
+		    {
+		    	$data = array();
+			    $data['email']    = $user['email'];
+			    $school   = $this->account->get('school');
+				if (strtolower($school) == 'admin')
+			    {
+			    	$data['school'] =$user['school'];
+			    }
+			    else 
+			    {
+			    	$data['school'] = $school;
+			    }
+			    $data['forename'] =$user['forename'];
+			    $data['surname'] = $user['surname'];
+			    $data['username'] = $user['username'];
+			    $data['password'] = $user['password'];
+			    $data['class'] = $user['class'];
+			    $data['year'] = $user['year'];
+			    $data['form'] = $user['form'];
+			    $data['type'] = $user['type'];
+			    $data['title'] = $user['title'];
+
+			    $this->account_model->create($data);
+		    }
+        }
+		
+
+		if($this->form->run())
+		{
+	        $config['upload_path'] = './file/uploads/'; // happens to be my test upload path
+	        $config['allowed_types'] = 'csv';    
+	        $config['max_size']    = '500'; 
+	        
+	        $this->load->library('upload', $config);
+	    
+	        if ( ! $this->upload->do_upload())
+	        {
+	        	print_r($this->upload->data());
+	            echo $this->upload->display_errors();
+	            echo 'hell';
+	            die;
+	        }
+	        else
+	        {
+	            echo $this->upload->display_errors();
+	            echo "worked";
+	            die;
+	        }
+			
+			$data['email']    = $this->input->post('email');
+			$data['school'] = $this->input->post('school');
+			if ($this->input->post('schoolnew'))
+			{
+				$data['school'] = $this->input->post('schoolnew');
+			}
+			$data['username'] = $this->input->post('username');
+			$data['password'] = $this->input->post('password');
+			$schooladmin = $this->input->post('schooladmin');
+
+			if($this->account_model->exists(array('email' => $data['email'])))
+			{
+				$data['error'] = 'That email is already taken.';
+			}
+			if($this->account_model->exists(array('school' => $data['school'],'username' => $data['username'])))
+			{
+				$data['error'] = 'That username has already been taken';
+			}
+			if (!isset($data['error']))
+			{
+				$this->account_model->create($data);
+
+				$this->account->login($data['username'],$data['school']);
+
+				redirect('user/manage');
+			}
+		}
+
+		else
+		{
+			$data['error'] = validation_errors(' ', ' ');
+		}
+		$school   = $this->account->get('school');
+		if (strtolower($school) == 'admin')
+		{
+			if ($tmp = $this->account_model->get_schools())
+			{
+				$k = array(''=>'--Select a School--');
+				foreach ($tmp as $tmp_school)	{
+					$k[$tmp_school->school] = $tmp_school->school;
+				}
+				$data['school'] = $k;
+			}
+		}
+		else
+		{
+			$data['users'] = $this->account_model->get_users($school);
+			$data['school'] = $school;
+		}
+        
+        $this->load->view('user/bulk_upload', $data);
+
 
 	}
 	// --------------------------------------------------------------------
