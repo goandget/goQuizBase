@@ -236,6 +236,7 @@ class User extends CI_Controller {
 		if (strtolower($school) == 'admin')
 		{
 			$data['users'] = $this->account_model->get_users('');
+			$data['admin'] = 1;
 			if ($tmp = $this->account_model->get_schools())
 			{
 				$k = array(''=>'--Select a School--');
@@ -310,6 +311,8 @@ class User extends CI_Controller {
             //  Load the database and the model for saving users data
 		    $this->load->database();
 		    $this->load->model('account_model');
+			
+			$error = array();
 		    
 		    foreach ($users as $user)
 		    {
@@ -334,10 +337,30 @@ class User extends CI_Controller {
 			    $data['type'] = $user['type'];
 			    $data['title'] = $user['title'];
 
+			    // Check to see if any of required fields are empty
+			    $tmpArray = array();
+			    foreach (key($data) as $k)
+			    {
+			    	if  (in_array($k,$validate) && isset($data[$k]))
+			    	{
+			    		$tmpArray[] = 'There was no '.ucfirst($k).' included.';
+
+			    	}
+			    }
+
+			    if (count($tmpArray) > 0)
+			    {
+			    	$error[] = array('pupil'=>$data['forename'].' '.$data['surname'],'errors'=>$tmpArray);
+			    }
+
 			    $this->account_model->create($data);
 		    }
         }
 		
+		if (isset($error) && count($error) > 0)
+		{
+			$data['error'] = $error;
+		}
 
 		if($this->form->run())
 		{

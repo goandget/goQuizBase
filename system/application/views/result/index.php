@@ -6,73 +6,81 @@
 
 		<p style="color:red;font-weight:bold;"><?php echo $error;?></p>
 		<div>
-			<!--<h2>Overall View</h2>
-			<table>
-				<tr>
-					<th>Name</th>
-					<th>Username</th>
-					<th>Class</th>
-					<th>Year</th>
-					<th>Best Result</th>
-					<th>Last Result</th>
-					<th>Average Result</th>
-					<th>Attempts</th>
-					<th>Last Time</th>
-				</tr>
-				<?php foreach($users as $user): ?>
-				<tr>
-					<td><?php echo $user->forename.' '.$user->surname;?></td>
-					<td><?php echo $user->username;?></td>
-					<td><?php echo $user->class; ?></td>
-					<td><?php echo $user->year; ?></td>
-					<td><?php if(isset($bests[$user->id])) { echo $bests[$user->id]->correct; } else { ?>N/A<?php } ?></td>
-					<td><?php if(isset($lasts[$user->id])) { echo $lasts[$user->id]->correct;  } else { ?>N/A<?php } ?></td>
-					<td><?php if(isset($averages[$user->id])) { echo (int) ($averages[$user->id]->correct/$averages[$user->id]->taken);  } else { ?>N/A<?php } ?></td>
-					<td><?php if(isset($averages[$user->id])) { echo $averages[$user->id]->taken;  } else { ?>N/A<?php } ?></td>
-					<td><?php if(isset($lasts[$user->id])) { echo $lasts[$user->id]->start_time; } else { ?>N/A<?php } ?></td>
-				</tr>
-				<?php endforeach; ?>
-			</table>
-			<hr>-->
 			<h2>Last Assigned Quiz: Assign Details</h2>
 			<?php
-			if (isset($user))
+			if (is_array($users))
 			{ ?>
-			<table>
+			<table width="90%">
 				<tr>
 					<th>Name</th>
-					<?php
-					for ($i=1;$i <= count($user); $i++)
-					{
-						echo '<th>Q'.$i.'</th>';
-					}?>
-					<th>Total</th>
+					<th>&nbsp;</th>
+					<th>Result</th>
 					<th>Attempts</th>
 				</tr>
 				<?php foreach($users as $user): ?>
 				<tr>
-					<td><?php echo $user[0]->forename.' '.$user[0]->surname;?></td>
+					<td><?php echo $user[0]->forename.' '.$user[0]->surname;?></td><td>
+					<table><tr>
 					<?php
+					$row1 = '';
+					$row2 = '<tr>';
 					for ($i=0;$i < count($user); $i++)
 					{
-						echo '<td><img src="'.base_url().'img/correct'.$user[$i]->correct.'.png" /></td>';
+						if (($i %20 == 0)&&($i != 0))
+						{
+							echo $row1.'</tr>';
+							echo $row2.'</tr>';
+							$row1 = '<tr>';
+							$row2 = '<tr>';
+						}
+						$row1.= '<th>Q'.($i+1).'</th>';
+						$row2.= '<td><img src="'.base_url().'img/correct'.$user[$i]->correct.'.png" /></td>';
 					}
-					echo '<td>'.$user[0]->total.'</td>';
-					echo '<td>'.$user[0]->attempts.'</td>';
+					echo $row1.'</tr>';
+					echo $row2.'</tr>';
+					$total = $i;
+					while ($i % 21 == 0)
+					{
+						echo '<td>&nbsp;</td>';
+						$i++;
+					}
+					echo '</tr>';
+					?>
+					</table>
+					<?php
+						echo '<td>'.$user[0]->total.' / '.$total.'</td><td>'.$user[0]->attempts.'</td>';
 					?>
 				</tr>
 				<?php endforeach; ?>
 			</table>
+			Export these results: <a href="<?php echo site_url('result/export/'.$this->uri->segment(3)); ?>">export</a>
 			<?php
 			}
 			else 
 			{
-				?>
-				<p>There are no results stored</p>
-				<?php
-			}?>
+			?>
+				<p>There are no results stored.</p>
+			<?php }?>
 			<hr>
 			<h2> Other Assigned Quizes: </h2>
+			<table>
+				<tr>
+					<th>Start Date</th>
+					<th>End Date</th>
+					<th>Type</th>
+					<th>Assigned</th>
+					<th>&nbsp;</th>
+				</tr>
+			<?php foreach($assign as $assigned): ?>
+				<tr>
+					<td><?php echo $assigned['start_date']; ?></td>
+					<td><?php echo $assigned['end_date']; ?></td>
+					<td><?php echo $assigned['type']; ?></td>
+					<td><?php echo $assigned['assign']; ?></td>
+					<td><a href="<?php echo site_url('result/view/'.$assigned['id']); ?>">View Results</a></td>
+				</tr>
+			<?php endforeach; ?>
+			</table>
 		</div>
 	</div>
 <?php $this->load->view('layout/footer'); ?>

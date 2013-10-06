@@ -2,7 +2,7 @@
 	<h1>Register</h1>
 
 	<div id="body">
-		<p class="breadcrumbs"><a href="<?php echo site_url('user');?>">Home</a> &raquo; <a href="#">Manage</a> &raquo; <a href="#">Bulk Upload</a></p>
+		<p class="breadcrumbs"><a href="<?php echo site_url('user');?>">Home</a> &raquo; <a href="<?php echo site_url('user/manage');?>">Manage</a> &raquo; <a href="#">Bulk Upload</a></p>
 
 		<p style="color:red;font-weight:bold;"><?php echo $error;?></p>
 		<div>

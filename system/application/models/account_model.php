@@ -182,7 +182,7 @@ class Account_model extends CI_Model {
 	 */
 	public function get_users($school)
 	{
-		$this->db->select('forename,surname,class,id,username');
+		$this->db->select('forename,surname,class,id,username,school');
 		if ($school != '')
 		{
 			$this->db->where("school",$school); 

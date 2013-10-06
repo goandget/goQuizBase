@@ -78,7 +78,8 @@
 			<?php echo form_close();?>
 		</div>
 		<div>
-			<table>
+		<p>Quick Find: <input type="text" id="quickfind"><a id="cleanfilters">Clear Filters</a></p>
+			<table width="90%">
 				<tr>
 					<th>Name</th>
 					<th>Username</th>
@@ -90,6 +91,9 @@
 					<td><?php echo $user->forename.' '.$user->surname;?></td>
 					<td><?php echo $user->username;?></td>
 					<td><?php echo $user->class; ?></td>
+				<?php if ($admin) { ?>
+					<td><?php echo $user->school; ?></td>
+				<?php }	?>
 					<td>
 						<a href="#<?php echo site_url('user/edit/'.$user->id); ?>" onclick="alert('This feature isn\'t available yet!')">edit</a>
 						<a href="<?php echo site_url('user/delete/'.$user->id); ?>">del</a>
@@ -98,4 +102,12 @@
 				<?php endforeach; ?>
 			</table>
 		</div>
+	<script type="text/javascript">
+		var base_url = '<?php echo base_url();?>';
+	</script>
+	<link rel="stylesheet" href="<?php echo base_url();?>css/jquery-ui.css" />
+  	<script src="<?php echo base_url();?>js/jquery-1.9.1.js"></script>
+	<script type="text/javascript" src="<?php echo base_url();?>js/picnet.table.filter.min.js"></script>
+	<script type="text/javascript" src="<?php echo base_url();?>js/assign-admin.js"></script>
+  	<script src="<?php echo base_url();?>js/jquery-ui.js"></script>
 <?php $this->load->view('layout/footer'); ?>

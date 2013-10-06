@@ -12,11 +12,14 @@
 		<p>End Date: <input type="text" id="endDate" readonly /></p>
 		<p class="clr-b instruction">Click on either the User or the Class to assign this Quiz.</p>
 		<p>Quick Find: <input type="text" id="quickfind"><a id="cleanfilters">Clear Filters</a></p>
-		<table id="users">
+		<table id="users" width="90%">
 			<thead>
 				<tr>
 					<th>Name</th>
 					<th>Class</th>
+				<?php if ($admin) { ?>
+					<th>School</th>
+				<?php } ?>
 					<th>&nbsp;</th>
 				</tr>
 			</thead>
@@ -25,6 +28,9 @@
 			<tr>
 				<td><a class="assign" alt="<?php echo $user->id;?>"><?php echo $user->forename.' '.$user->surname;?></a></td>
 				<td><a class="assign"><?php echo $user->class; ?></a></td>
+				<?php if ($admin) { ?>
+				<td><?php echo $user->school; ?></td>
+				<?php } ?>
 			</tr>
 			<?php endforeach; ?>
 			</tbody>
@@ -33,9 +39,9 @@
 	<script type="text/javascript">
 		var base_url = '<?php echo base_url();?>';
 	</script>
-	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" />
-  	<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+	<link rel="stylesheet" href="<?php echo base_url();?>css/jquery-ui.css" />
+  	<script src="<?php echo base_url();?>js/jquery-1.9.1.js"></script>
 	<script type="text/javascript" src="<?php echo base_url();?>js/picnet.table.filter.min.js"></script>
 	<script type="text/javascript" src="<?php echo base_url();?>js/assign-admin.js"></script>
-  	<script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
+  	<script src="<?php echo base_url();?>js/jquery-ui.js"></script>
 <?php $this->load->view('layout/footer'); ?>

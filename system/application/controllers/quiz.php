@@ -241,6 +241,7 @@ class Quiz extends CI_Controller {
 		$data['school']   = $this->account->get('school');
 		if (strtolower($data['school']) == 'admin')
 		{
+			$data['admin'] = 1;
 			$data['users'] = $this->account_model->get_users('');
 		}
 		else
